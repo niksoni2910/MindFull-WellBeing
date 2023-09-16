@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_app/Screens/details.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class ResultsPage extends StatefulWidget {
@@ -19,42 +20,55 @@ class _ResultsPageState extends State<ResultsPage> {
   ];
 
   Widget buildIllnessIndicators(String name, double percentage) {
-    return SleekCircularSlider(
-
-      appearance: CircularSliderAppearance(
-        
-        
-        size: 130.0,
-        startAngle: 180,
-        angleRange: 180,
-        customColors: CustomSliderColors(
-          progressBarColors: [
-            Colors.blue,
-            Colors.blue
-          ], // Set the same color for both
-        ),
-        customWidths: CustomSliderWidths(
-          trackWidth: 8.0,
-          progressBarWidth: 8.0,
-        ),
-      ),
-      min: 0,
-      max: 100,
-      initialValue: percentage,
-      innerWidget: (percentage) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        textDirection: TextDirection.ltr,
-        children:[
-          Text(
-          '${percentage.toStringAsFixed(1)}%',
-          style: TextStyle(fontSize: 16.0),
-        ),
-
-        Text(name,softWrap: true,textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)
-        
-        ]
-      )
+    return Column(
+      children: [
+        SleekCircularSlider(
+            appearance: CircularSliderAppearance(
+              size: 130.0,
+              startAngle: 180,
+              angleRange: 180,
+              customColors: CustomSliderColors(
+                progressBarColors: [
+                  Colors.blue,
+                  Colors.blue
+                ], // Set the same color for both
+              ),
+              customWidths: CustomSliderWidths(
+                trackWidth: 8.0,
+                progressBarWidth: 8.0,
+              ),
+            ),
+            min: 0,
+            max: 100,
+            initialValue: percentage,
+            innerWidget: (percentage) => Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    textDirection: TextDirection.ltr,
+                    children: [
+                      Text(
+                        '${percentage.toStringAsFixed(1)}%',
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                      Text(
+                        name,
+                        softWrap: true,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      )
+                    ])),
+        ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailScreen(),
+                  ));
+            },
+            child: Text("Details")),
+        SizedBox(height: 5,)
+      ],
     );
 
     // return CircularPercentIndicator(
@@ -80,7 +94,6 @@ class _ResultsPageState extends State<ResultsPage> {
         children: [
           buildIllnessIndicators(
               '${illnessData[i]['name']}', illnessData[i]['percentage']),
-
           buildIllnessIndicators(
               '${illnessData[i + 1]['name']}', illnessData[i + 1]['percentage'])
         ],
@@ -100,10 +113,6 @@ class _ResultsPageState extends State<ResultsPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                'Mental Health Assessment Results',
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-              ),
               const SizedBox(height: 20.0),
               Column(
                 children: createList(),

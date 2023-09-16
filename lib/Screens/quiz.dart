@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:health_app/Screens/result_page.dart';
+import 'package:health_app/bottom_navigator.dart';
 
 class QuizScreen extends StatefulWidget {
   @override
@@ -68,7 +70,7 @@ class _QuizScreenState extends State<QuizScreen> {
     "Not at all","A little Bit","Moderately","Quite A Bit","Extremely"
   ];
 
-  int currentQuestionIndex = 0;
+  int currentQuestionIndex = 52;
   String? selectedOption;
 
   @override
@@ -77,7 +79,6 @@ class _QuizScreenState extends State<QuizScreen> {
       appBar: AppBar(
         title: Text("Quiz App"),
       ),
-      
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -86,7 +87,7 @@ class _QuizScreenState extends State<QuizScreen> {
           ),),
 
         child:Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
               Text(
@@ -119,7 +120,8 @@ class _QuizScreenState extends State<QuizScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(
+                  if(currentQuestionIndex>0)
+                    ElevatedButton(
                     onPressed: () {
                       // Check the answer and move to the next question
                       // You can implement the scoring logic here
@@ -140,6 +142,9 @@ class _QuizScreenState extends State<QuizScreen> {
                     onPressed: () {
                       // Check the answer and move to the next question
                       // You can implement the scoring logic here
+                      if(currentQuestionIndex==52){
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => (ResultsPage()),));
+                      }
                       if (currentQuestionIndex < questions.length - 1) {
                         setState(() {
                           currentQuestionIndex++;
@@ -150,7 +155,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         // Implement your desired behavior here
                       }
                     },
-                    child: Text("Next"),
+                    child: currentQuestionIndex==52?Text("Submit"):Text("Next"),
                   ),
                   
                   
