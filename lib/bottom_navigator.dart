@@ -1,29 +1,27 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:health_app/blog.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:health_app/Screens/blog.dart';
 import 'package:health_app/main.dart';
-import 'package:health_app/profile.dart';
+import 'package:health_app/Screens/profile.dart';
+import 'package:health_app/Screens/quiz.dart';
 
 class UserBottomNav extends StatefulWidget {
-  const UserBottomNav({
-    Key? key,
-  }) : super(key: key);
+  const UserBottomNav({super.key});
+
   @override
-  _UserBottomNavState createState() => _UserBottomNavState();
+  State<UserBottomNav> createState() => _UserBottomNavState();
 }
 
 class _UserBottomNavState extends State<UserBottomNav> {
   int _currentIndex = 0;
-  List<Widget> _children = [];
-  void createlist() {
-    _children = [
-      QuizApp(),
-      Blog(),
-      Profile(),
-    ];
-  }
+  final List<Widget> _children = [
+    QuizScreen(),
+    const Blog(),
+    const UserProfile(),
+  ];
 
   void onTappedBar(int index) {
     setState(() {
@@ -31,7 +29,7 @@ class _UserBottomNavState extends State<UserBottomNav> {
     });
   }
 
-  Future<bool> _onBackPressed() {
+  Future<bool> _onBackPressed() async {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -59,27 +57,20 @@ class _UserBottomNavState extends State<UserBottomNav> {
           const SizedBox(width: 16),
         ],
       ),
-    ).then((value) => value);
+    ).then((value) => value ?? false); // Ensure to return false if the dialog is dismissed
   }
-
   @override
+
   void didChangeDependencies() {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     super.didChangeDependencies();
   }
-
-  @override
-  void initState() {
-    super.initState();
-    createlist();
-  }
-
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
         body: _children[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar: BottomNavigationBar(  
           type: BottomNavigationBarType.fixed,
           onTap: onTappedBar,
           currentIndex: _currentIndex,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:health_app/quiz.dart';
+import 'package:health_app/Screens/profile.dart';
+import 'package:health_app/bottom_navigator.dart';
+import 'package:health_app/Screens/quiz.dart';
 
 void main() {
   runApp(QuizApp());
@@ -8,8 +10,8 @@ void main() {
 class QuizApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: QuizScreen(),
+    return const MaterialApp(
+      home: UserBottomNav(),
     );
   }
 }
