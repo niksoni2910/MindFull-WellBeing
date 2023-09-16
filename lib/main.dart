@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_app/Screens/profile.dart';
+import 'package:health_app/Screens/splash_screen.dart';
 import 'package:health_app/bottom_navigator.dart';
 import 'package:health_app/Screens/quiz.dart';
 
@@ -10,8 +11,9 @@ void main() {
 class QuizApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: UserBottomNav(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false;,
+      home: SplashScreen(),
     );
   }
 }

@@ -44,7 +44,7 @@ class _UserProfileState extends State<UserProfile> {
   Widget recommendation = CircularProgressIndicator();
   Future<String> generateMentalHealthRecommendation() async {
     final apiKey =
-        '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'; // Replace with your OpenAI API key
+        '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'; // Replace with your OpenAI API key
     final apiUrl =
         'https://api.openai.com/v1/chat/completions'; // Use the GPT-3.5 Turbo engine
     final headers = {
@@ -97,12 +97,12 @@ class _UserProfileState extends State<UserProfile> {
     );
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    recommendation = recommend();
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   recommendation = recommend();
+  // }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,15 +115,19 @@ class _UserProfileState extends State<UserProfile> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ListTile(
-                title: Text('Name'),
-                subtitle: Text(userName),
+              InfoCard(
+                // title: Text('Name'),
+                // subtitle: Text(userName), 
+                text: userName, icon: Icons.person,
+                onPressed: () {},
                 // You can add an "Edit" button to update user information here
               ),
-              ListTile(
-                title: Text('Email Address'),
-                subtitle: Text(userEmail),
-                // You can add an "Edit" button to update email here
+              InfoCard(
+                // title: Text('Name'),
+                // subtitle: Text(userName), 
+                text: userEmail, icon: Icons.email,
+                onPressed: () {},
+                // You can add an "Edit" button to update user information here
               ),
               Divider(height: 30),
 
@@ -241,6 +245,41 @@ class _UserProfileState extends State<UserProfile> {
               recommendation,
               // You can use a ListView or other widgets for this section
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class InfoCard extends StatelessWidget {
+  final String text;
+  final IconData icon;
+  void Function()? onPressed;
+
+  InfoCard({required this.text, required this.icon, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Card(
+        color: Colors.white,
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+        child: ListTile(
+          leading: Icon(
+            icon,
+            color: Colors.blue,
+          ),
+          title: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Text(
+              text,
+              style: const TextStyle(
+                  color: Colors.blue,
+                  fontSize: 20,
+                  fontFamily: "Source Sans Pro"),
+            ),
           ),
         ),
       ),

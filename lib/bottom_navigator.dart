@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:health_app/Screens/blog.dart';
-import 'package:health_app/main.dart';
 import 'package:health_app/Screens/profile.dart';
 import 'package:health_app/Screens/quiz.dart';
+import 'package:health_app/Screens/start_quiz_screen.dart';
 
 class UserBottomNav extends StatefulWidget {
   const UserBottomNav({super.key});
@@ -18,7 +16,7 @@ class UserBottomNav extends StatefulWidget {
 class _UserBottomNavState extends State<UserBottomNav> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    QuizScreen(),
+    StartQuiz(),
     const Blog(),
     const UserProfile(),
   ];
