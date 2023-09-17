@@ -39,7 +39,12 @@ dependencies:
   sleek_circular_slider: ^2.0.1
   fl_chart: ^0.63.0
   http: ^1.1.0
+<<<<<<< HEAD
   flutter_svg: ^2.0.7
+=======
+  flutter_svg: ^2.0.5
+
+>>>>>>> b7b086f603af3ec54e4c85acac9bffbe5b199a6a
 dev_dependencies:
   flutter_test:
     sdk: flutter
