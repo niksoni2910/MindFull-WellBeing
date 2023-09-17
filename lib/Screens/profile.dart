@@ -97,7 +97,11 @@ class _UserProfileState extends State<UserProfile> {
     );
   }
 
+<<<<<<< HEAD
+  @override
+=======
   // @override
+// >>>>>>> b7b086f603af3ec54e4c85acac9bffbe5b199a6a
   // void initState() {
   //   // TODO: implement initState
   //   super.initState();
