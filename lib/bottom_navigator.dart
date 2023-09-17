@@ -19,7 +19,7 @@ class _UserBottomNavState extends State<UserBottomNav> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     QuizScreen(),
-    const Blog(),
+    const Blog2(),
     const UserProfile(),
   ];
 
@@ -57,20 +57,22 @@ class _UserBottomNavState extends State<UserBottomNav> {
           const SizedBox(width: 16),
         ],
       ),
-    ).then((value) => value ?? false); // Ensure to return false if the dialog is dismissed
+    ).then((value) =>
+        value ?? false); // Ensure to return false if the dialog is dismissed
   }
-  @override
 
+  @override
   void didChangeDependencies() {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     super.didChangeDependencies();
   }
+
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
         body: _children[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(  
+        bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           onTap: onTappedBar,
           currentIndex: _currentIndex,

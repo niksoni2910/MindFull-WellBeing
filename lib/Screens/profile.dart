@@ -98,11 +98,11 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    recommendation = recommend();
-  }
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   recommendation = recommend();
+  // }
 
   Widget build(BuildContext context) {
     return Scaffold(
