@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_app/constants.dart';
+import 'package:health_app/constants/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Blog2 extends StatefulWidget {

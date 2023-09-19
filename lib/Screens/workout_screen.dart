@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_app/Screens/blog.dart';
-import 'package:health_app/constants.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:health_app/Screens/workout_results.dart';
 
 class Workout extends StatefulWidget {
   const Workout({super.key});
@@ -30,19 +28,19 @@ class DropdownScreen extends StatefulWidget {
 }
 
 class _DropdownScreenState extends State<DropdownScreen> {
-  String selectedOption1 = 'Cardio';
-  String selectedOption2 = 'Beginner';
+  String selectedOption1 = 'cardio';
+  String selectedOption2 = 'beginner';
 
   List<String> dropdownItems1 = [
-    'Cardio',
+    'cardio',
     'Olympic Weightlifting',
     'Plyometrics',
     'Powerlifting',
-    'Stringth',
+    'Strength',
     'Streching',
     'Strongman',
   ];
-  List<String> dropdownItems2 = ['Beginner', 'Intermediate', 'Expert'];
+  List<String> dropdownItems2 = ['beginner', 'Intermediate', 'Expert'];
 
   @override
   Widget build(BuildContext context) {
@@ -133,12 +131,11 @@ class _DropdownScreenState extends State<DropdownScreen> {
           ElevatedButton(
             style: ButtonStyle(elevation: MaterialStatePropertyAll(20)),
             onPressed: () {
-              // Add code to handle button press (navigate to another screen, etc.)
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       // builder: (context) => Workout_Result(),
-              //     ));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyHomePage(type: selectedOption1, difficulty: selectedOption2),
+                  ));
             },
             child: Text('Go!'),
           ),

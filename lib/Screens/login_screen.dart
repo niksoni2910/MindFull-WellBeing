@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:health_app/bottom_navigator.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -64,7 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SvgPicture.asset('assets/logo2.svg', height: size.height / 8, width: size.height / 8),
+                  // SvgPicture.asset('assets/logo2.svg',
+                  //     height: size.height / 8, width: size.height / 8),
                   SizedBox(height: size.height * 0.03),
                   Text.rich(
                     TextSpan(
@@ -74,8 +76,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         letterSpacing: 2.0,
                       ),
                       children: const [
-                        TextSpan(text: 'LOGIN', style: TextStyle(fontWeight: FontWeight.w800)),
-                        TextSpan(text: 'PAGE', style: TextStyle(color: Color(0xFFFE9879), fontWeight: FontWeight.w800)),
+                        TextSpan(
+                            text: 'LOGIN',
+                            style: TextStyle(fontWeight: FontWeight.w800)),
+                        TextSpan(
+                            text: 'PAGE',
+                            style: TextStyle(
+                                color: Color(0xFFFE9879),
+                                fontWeight: FontWeight.w800)),
                       ],
                     ),
                     textAlign: TextAlign.center,
@@ -133,12 +141,16 @@ class _LoginScreenState extends State<LoginScreen> {
             fontSize: 16.0,
             color: const Color(0xFF151624).withOpacity(0.5),
           ),
-          fillColor: emailController.text.isNotEmpty ? Colors.transparent : const Color.fromRGBO(248, 247, 251, 1),
+          fillColor: emailController.text.isNotEmpty
+              ? Colors.transparent
+              : const Color.fromRGBO(248, 247, 251, 1),
           filled: true,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(40),
             borderSide: BorderSide(
-              color: emailController.text.isEmpty ? Colors.transparent : const Color.fromRGBO(44, 185, 176, 1),
+              color: emailController.text.isEmpty
+                  ? Colors.transparent
+                  : const Color.fromRGBO(44, 185, 176, 1),
             ),
           ),
           focusedBorder: OutlineInputBorder(
@@ -147,7 +159,8 @@ class _LoginScreenState extends State<LoginScreen> {
               color: Color.fromRGBO(44, 185, 176, 1),
             ),
           ),
-          prefixIcon: Icon(Icons.email, color: const Color(0xFF151624).withOpacity(0.5), size: 16),
+          prefixIcon: Icon(Icons.email,
+              color: const Color(0xFF151624).withOpacity(0.5), size: 16),
           suffix: Container(
             alignment: Alignment.center,
             width: 24.0,
@@ -195,12 +208,16 @@ class _LoginScreenState extends State<LoginScreen> {
             fontSize: 16.0,
             color: const Color(0xFF151624).withOpacity(0.5),
           ),
-          fillColor: passController.text.isNotEmpty ? Colors.transparent : const Color.fromRGBO(248, 247, 251, 1),
+          fillColor: passController.text.isNotEmpty
+              ? Colors.transparent
+              : const Color.fromRGBO(248, 247, 251, 1),
           filled: true,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(40),
             borderSide: BorderSide(
-              color: passController.text.isEmpty ? Colors.transparent : const Color.fromRGBO(44, 185, 176, 1),
+              color: passController.text.isEmpty
+                  ? Colors.transparent
+                  : const Color.fromRGBO(44, 185, 176, 1),
             ),
           ),
           focusedBorder: OutlineInputBorder(
@@ -209,7 +226,8 @@ class _LoginScreenState extends State<LoginScreen> {
               color: Color.fromRGBO(44, 185, 176, 1),
             ),
           ),
-          prefixIcon: Icon(Icons.lock_outline_rounded, color: const Color(0xFF151624).withOpacity(0.5), size: 16),
+          prefixIcon: Icon(Icons.lock_outline_rounded,
+              color: const Color(0xFF151624).withOpacity(0.5), size: 16),
           suffix: Container(
             alignment: Alignment.center,
             width: 24.0,
@@ -255,7 +273,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Text(
               'Remember Me',
-              style: GoogleFonts.inter(fontSize: 16.0, color: const Color(0xFF151624).withOpacity(0.5)),
+              style: GoogleFonts.inter(
+                  fontSize: 16.0,
+                  color: const Color(0xFF151624).withOpacity(0.5)),
             ),
           ],
         ),
@@ -265,7 +285,8 @@ class _LoginScreenState extends State<LoginScreen> {
           },
           child: Text(
             'Forgot Password?',
-            style: GoogleFonts.inter(fontSize: 14.0, color: const Color(0xFF21899C)),
+            style: GoogleFonts.inter(
+                fontSize: 14.0, color: const Color(0xFF21899C)),
           ),
         ),
       ],
@@ -282,11 +303,17 @@ class _LoginScreenState extends State<LoginScreen> {
           if (_formKey.currentState!.validate()) {
             // Form is valid, perform the sign-in action.
             // You can access emailController.text and passController.text here.
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => UserBottomNav(),
+                ));
           }
         },
         style: ElevatedButton.styleFrom(
           primary: const Color(0xFF21899C),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         ),
         child: Text(
           'Sign in',
@@ -338,7 +365,7 @@ class _LoginScreenState extends State<LoginScreen> {
       children: <Widget>[
         // Google button
         TextButton(
-          onPressed: (){},
+          onPressed: () {},
           child: Container(
             alignment: Alignment.center,
             width: size.width / 2.8,
@@ -365,7 +392,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(width: 16),
                 Text(
                   'Google',
-                  style: GoogleFonts.inter(fontSize: 14.0, color: const Color(0xFFEA4335)),
+                  style: GoogleFonts.inter(
+                      fontSize: 14.0, color: const Color(0xFFEA4335)),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -376,7 +404,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         // Facebook button
         TextButton(
-          onPressed: (){},
+          onPressed: () {},
           child: Container(
             alignment: Alignment.center,
             width: size.width / 2.8,
@@ -403,7 +431,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(width: 16),
                 Text(
                   'Facebook',
-                  style: GoogleFonts.inter(fontSize: 14.0, color: const Color(0xFF4285F4)),
+                  style: GoogleFonts.inter(
+                      fontSize: 14.0, color: const Color(0xFF4285F4)),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -421,8 +450,13 @@ class _LoginScreenState extends State<LoginScreen> {
         TextSpan(
           style: GoogleFonts.inter(fontSize: 12.0, color: Colors.black),
           children: const [
-            TextSpan(text: 'Don’t have an account? ', style: TextStyle(fontWeight: FontWeight.w500)),
-            TextSpan(text: 'Sign Up here', style: TextStyle(color: Color(0xFFFF7248), fontWeight: FontWeight.w500)),
+            TextSpan(
+                text: 'Don’t have an account? ',
+                style: TextStyle(fontWeight: FontWeight.w500)),
+            TextSpan(
+                text: 'Sign Up here',
+                style: TextStyle(
+                    color: Color(0xFFFF7248), fontWeight: FontWeight.w500)),
           ],
         ),
         textAlign: TextAlign.center,
