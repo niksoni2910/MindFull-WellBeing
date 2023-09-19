@@ -12,7 +12,7 @@ class _StartQuizState extends State<StartQuiz> {
     return Scaffold(
       
       appBar: AppBar(
-        title: Text('Start Screen'),
+        title: Text('Start Assesment'),
       ),
       body: Container(
         decoration: BoxDecoration(

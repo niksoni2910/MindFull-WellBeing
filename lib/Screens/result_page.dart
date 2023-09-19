@@ -9,22 +9,23 @@ class ResultsPage extends StatefulWidget {
 
 class _ResultsPageState extends State<ResultsPage> {
   List<Map<String, dynamic>> illnessData = [
-    {'name': 'Stress', 'percentage': 30.0},
-    {'name': 'Anxiety', 'percentage': 20.0},
-    {'name': 'Obsessive Compulsive Disorder', 'percentage': 15.0},
+    {'name': 'Somatization', 'percentage': 30.0},
+    {'name': 'OCD', 'percentage': 20.0},
+    {'name': 'Interpersonal Sensitivity', 'percentage': 5.0},
     {'name': 'Depression', 'percentage': 10.0},
+    {'name': 'Anxiety', 'percentage': 15.0},
     {'name': 'Phobic Anxiety', 'percentage': 8.0},
     {'name': 'Paranoid Ideation', 'percentage': 7.0},
-    {'name': 'Interpersonal Sensitivity', 'percentage': 5.0},
+    {'name': 'Hostility', 'percentage': 30.0},
     {'name': 'Psychoticism', 'percentage': 90.0},
   ];
 
-  Widget buildIllnessIndicators(String name, double percentage) {
+  Widget buildIllnessIndicators(String name, double percentage,int index) {
     return Column(
       children: [
         SleekCircularSlider(
             appearance: CircularSliderAppearance(
-              size: 130.0,
+              size: name=="Overall"?125:100.0,
               startAngle: 180,
               angleRange: 180,
               customColors: CustomSliderColors(
@@ -55,19 +56,21 @@ class _ResultsPageState extends State<ResultsPage> {
                         softWrap: true,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
+                            fontWeight: FontWeight.bold, fontSize: 12),
                       )
                     ])),
-        ElevatedButton(
+        if(name!='Overall')ElevatedButton(
             onPressed: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DetailScreen(),
+                    builder: (context) => DetailScreen(index: index,),
                   ));
             },
             child: Text("Details")),
-        SizedBox(height: 5,)
+        SizedBox(
+          height: 5,
+        )
       ],
     );
 
@@ -88,14 +91,25 @@ class _ResultsPageState extends State<ResultsPage> {
 
   List<Widget> createList() {
     final List<Widget> rows = [];
-    for (int i = 0; i < 8; i += 2) {
+    rows.add(Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        buildIllnessIndicators(
+              'Overall', 10,0),
+      ],
+      
+    ));
+    for (int i = 0; i < 9; i += 3) {
       rows.add(Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           buildIllnessIndicators(
-              '${illnessData[i]['name']}', illnessData[i]['percentage']),
+              '${illnessData[i]['name']}', illnessData[i]['percentage'],i),
           buildIllnessIndicators(
-              '${illnessData[i + 1]['name']}', illnessData[i + 1]['percentage'])
+              '${illnessData[i + 1]['name']}', illnessData[i + 1]['percentage'],i+1),
+          buildIllnessIndicators(
+              '${illnessData[i + 2]['name']}', illnessData[i + 1]['percentage'],i+2)
+
         ],
       ));
     }
@@ -113,7 +127,7 @@ class _ResultsPageState extends State<ResultsPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 20.0),
+              const SizedBox(height: 15.0),
               Column(
                 children: createList(),
               )
