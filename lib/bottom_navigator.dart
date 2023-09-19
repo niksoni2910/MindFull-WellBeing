@@ -5,6 +5,7 @@ import 'package:health_app/Screens/blog.dart';
 import 'package:health_app/Screens/profile.dart';
 import 'package:health_app/Screens/quiz.dart';
 import 'package:health_app/Screens/start_quiz_screen.dart';
+import 'package:health_app/Screens/workout_screen.dart';
 
 class UserBottomNav extends StatefulWidget {
   const UserBottomNav({super.key});
@@ -16,13 +17,9 @@ class UserBottomNav extends StatefulWidget {
 class _UserBottomNavState extends State<UserBottomNav> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-<<<<<<< HEAD
-    QuizScreen(),
-    const Blog2(),
-=======
     StartQuiz(),
-    const Blog(),
->>>>>>> b7b086f603af3ec54e4c85acac9bffbe5b199a6a
+    const Blog2(),
+    Workout(),
     const UserProfile(),
   ];
 
@@ -87,6 +84,10 @@ class _UserBottomNavState extends State<UserBottomNav> {
             BottomNavigationBarItem(
               icon: Icon(Icons.info),
               label: 'Blogs',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.work_outline),
+              label: 'Workout',
             ),
             BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.profile_circled),

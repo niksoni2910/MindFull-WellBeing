@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:health_app/Screens/login_screen.dart';
 import 'package:health_app/Screens/quiz.dart';
 import 'package:health_app/bottom_navigator.dart';
 
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => UserBottomNav(),
+            builder: (context) => LoginPage(),
           ));
     });
   }

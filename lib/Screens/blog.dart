@@ -57,7 +57,7 @@ class BlogPostCard extends StatelessWidget {
       child: Column(
         children: [
           AspectRatio(
-            aspectRatio: 1.5,
+            aspectRatio: 2,
             child: Image.asset(blog.image!),
           ),
           Container(
@@ -72,6 +72,7 @@ class BlogPostCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                
                 Row(
                   children: [
                     // Text(
@@ -132,17 +133,17 @@ class BlogPostCard extends StatelessWidget {
                     Spacer(),
                     IconButton(
                       icon: SvgPicture.asset(
-                          "assets_copy/icons/feather_thumbs-up.svg"),
+                          "/icons/feather_thumbs-up.svg"),
                       onPressed: () {},
                     ),
                     IconButton(
                       icon: SvgPicture.asset(
-                          "assets_copy/icons/feather_message-square.svg"),
+                          "/icons/feather_message-square.svg"),
                       onPressed: () {},
                     ),
                     IconButton(
                       icon: SvgPicture.asset(
-                          "assets_copy/icons/feather_share-2.svg"),
+                          "/icons/feather_share-2.svg"),
                       onPressed: () {},
                     ),
                   ],
@@ -165,21 +166,21 @@ class Blog {
 List<Blog> blogPosts = [
   Blog(
     date: "14 September 2023",
-    image: "assets/images/0.png",
-    title: "How Ireland’s biggest bank executed a comp lete security redesign",
+    image: "/images/0.png",
+    title: "How Ireland's biggest bank executed a comp lete security redesign",
     description:
         "Mobile banking has seen a huge increase since Coronavirus. In fact, CX platform Lightico found that 63 percent of people surveyed said they were more willing to try a new digital banking app than before the pandemic.So while you may be more inclined to bank remotely these days, cybercrime—especially targeting banks—is on the rise.",
   ),
   Blog(
     date: "14 September 2023",
-    image: "assets/images/1.png",
+    image: "/images/1.png",
     title: "5 Examples of Web Motion Design That Really Catch Your Eye",
     description:
         "Web animation has become one of the most exciting web design trends in 2020. It breathes more life into a website and makes user interactions even more appealing and intriguing. Animation for websites allows introducing a brand in an exceptionally creative way in modern digital space. It helps create a lasting impression, make a company",
   ),
   Blog(
     date: "14 September 2023",
-    image: "assets/images/2.png",
+    image: "/images/2.png",
     title: "The Principles of Dark UI Design",
     description:
         "Mobile banking has seen a huge increase since Coronavirus. In fact, CX platform Lightico found that 63 percent of people surveyed said they were more willing to try a new digital banking app than before the pandemic.So while you may be more inclined to bank remotely these days, cybercrime—especially targeting banks—is on the rise.",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_app/Screens/result_page.dart';
 import 'package:health_app/bottom_navigator.dart';
+import 'package:http/http.dart' as http;
 
 class QuizScreen extends StatefulWidget {
   @override
@@ -62,57 +63,97 @@ class _QuizScreenState extends State<QuizScreen> {
     "Never feeling close to another person",
     "Feelings of guilt",
     "The idea that something is wrong with your mind",
-    
-
   ];
   Map<int, String?> selectedOptions = {};
   List<String> options = [
-    "Not at all","A little Bit","Moderately","Quite A Bit","Extremely"
+    "Not at all",
+    "A little Bit",
+    "Moderately",
+    "Quite A Bit",
+    "Extremely"
   ];
 
   int currentQuestionIndex = 52;
   String? selectedOption;
+  Future<void> sendAnswers() async {
+    final String apiUrl =
+        'https://your-api-url.com/mental'; // Replace with your API URL
+    final List<String?> answersList = questions
+        .asMap()
+        .map(
+            (index, question) => MapEntry(index, selectedOptions[index] ?? "0"))
+        .values
+        .toList();
+
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        body: {
+          'mental_report': answersList.join(',')
+        }, // Join answers with commas
+      );
+      print(answersList);
+      if (response.statusCode == 200) {
+        // Handle a successful response here
+        print('Answers sent successfully');
+      } else {
+        // Handle errors
+        print('Failed to send answers. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle network or other errors
+      print('Error sending answers: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Quiz App"),
+        title: Text("Assesment"),
       ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/main-bg.jpg"),
             fit: BoxFit.cover,
-          ),),
-
-        child:Padding(
+          ),
+        ),
+        child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
               Text(
-                'Question ${currentQuestionIndex+1}',
-                style: TextStyle(fontSize: 20,color: Colors.white),
+                'Question ${currentQuestionIndex + 1}',
+                style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               SizedBox(height: 20),
-              Text("For the past week, how much were you bothered by:",style: TextStyle(fontSize: 20,color: Colors.white),),
+              Text(
+                "For the past week, how much were you bothered by:",
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
               SizedBox(height: 20),
-              Text(questions[currentQuestionIndex],style: TextStyle(fontSize: 20,color: Colors.white),),
+              Text(
+                questions[currentQuestionIndex],
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
               SizedBox(height: 20),
               Column(
                 children: options.map((option) {
                   return RadioListTile(
-                    
-                    title: Text(option,style: TextStyle(color: Colors.white),),
+                    title: Text(
+                      option,
+                      style: TextStyle(color: Colors.white),
+                    ),
                     value: option,
                     groupValue: selectedOptions[currentQuestionIndex],
                     onChanged: (value) {
-                    setState(() {
-                      selectedOption = value;
-                      selectedOptions[currentQuestionIndex] = value; // Store selected option for the current question
-                    });
-
-              },
+                      setState(() {
+                        selectedOption = value;
+                        selectedOptions[currentQuestionIndex] =
+                            value; // Store selected option for the current question
+                      });
+                    },
                   );
                 }).toList(),
               ),
@@ -120,30 +161,35 @@ class _QuizScreenState extends State<QuizScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if(currentQuestionIndex>0)
+                  if (currentQuestionIndex > 0)
                     ElevatedButton(
-                    onPressed: () {
-                      // Check the answer and move to the next question
-                      // You can implement the scoring logic here
-                      if (currentQuestionIndex >0) {
-                        setState(() {
-                          currentQuestionIndex--;
-                          selectedOption = null;
-                        });
-                      } else {
-                        // Quiz is finished, show results or navigate to a result screen
-                        // Implement your desired behavior here
-                      }
-                    },
-                    child: Text("Previous"),
-                  ),
+                      onPressed: () {
+                        // Check the answer and move to the next question
+                        // You can implement the scoring logic here
+                        if (currentQuestionIndex > 0) {
+                          setState(() {
+                            currentQuestionIndex--;
+                            selectedOption = null;
+                          });
+                        } else {
+                          // Quiz is finished, show results or navigate to a result screen
+                          // Implement your desired behavior here
+                        }
+                      },
+                      child: Text("Previous"),
+                    ),
                   SizedBox(width: 20),
                   ElevatedButton(
                     onPressed: () {
                       // Check the answer and move to the next question
                       // You can implement the scoring logic here
-                      if(currentQuestionIndex==52){
-                        Navigator.push(context,MaterialPageRoute(builder: (context) => (ResultsPage()),));
+                      if (currentQuestionIndex == 52) {
+                        sendAnswers();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => (ResultsPage()),
+                            ));
                       }
                       if (currentQuestionIndex < questions.length - 1) {
                         setState(() {
@@ -155,13 +201,12 @@ class _QuizScreenState extends State<QuizScreen> {
                         // Implement your desired behavior here
                       }
                     },
-                    child: currentQuestionIndex==52?Text("Submit"):Text("Next"),
+                    child: currentQuestionIndex == 52
+                        ? Text("Submit")
+                        : Text("Next"),
                   ),
-                  
-                  
                 ],
               ),
-              
             ],
           ),
         ),
