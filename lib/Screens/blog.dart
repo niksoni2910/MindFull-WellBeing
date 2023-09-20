@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:health_app/constants/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:health_app/api/blog_api.dart';
+import 'package:health_app/constants/constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Blog2 extends StatefulWidget {
   const Blog2({super.key});
@@ -10,55 +12,90 @@ class Blog2 extends StatefulWidget {
 }
 
 class _BlogState extends State<Blog2> {
+  List<NewsArticle> newsArticles = [];
+  bool isloading = true;
+
   @override
+  void initState() {
+    super.initState();
+    main();
+  }
+
+  Future<void> main() async {
+    // try {
+    newsArticles = await NewsArticle.getTopHeadlines(
+        'in', 'b06717d2cb2545c98fa601b779518f97');
+
+    setState(() {
+      isloading = false;
+    });
+
+    // Use the retrieved news data
+    //   for (var article in newsArticles) {
+    //     print('Title: ${article.title}');
+    //     print('Description: ${article.description}');
+    //     print('URL: ${article.url}');
+    //     print('URL to Image: ${article.urlToImage}');
+    //     print('Author: ${article.author}');
+    //     print('---');
+    //   }
+    // } catch (e) {
+    //   print('Error: $e');
+    // }
+  }
+
+  Future<void> _launchUrl(Uri _url) async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        minimum: EdgeInsets.all(8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 2,
-              child: SingleChildScrollView(
-                child: Container(
-                  // color: Colors.blue,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          colors: [Colors.lightBlue, Colors.purple])),
-                  child: Column(
-                    children: List.generate(
-                      blogPosts.length,
-                      (index) => BlogPostCard(blog: blogPosts[index]),
-                    ),
-                    // Header(),
-                  ),
-                ),
-              ),
-            ),
-          ],
+        child: Container(
+          // color: Colors.blue,
+          decoration: BoxDecoration(
+              gradient:
+                  LinearGradient(colors: [Colors.lightBlue, Colors.purple])),
+
+          child: _buildBody(),
         ),
       ),
     );
   }
-}
 
-class BlogPostCard extends StatelessWidget {
-  final Blog blog;
-  const BlogPostCard({
-    Key? key,
-    required this.blog,
-  }) : super(key: key);
+  Widget _buildBody() {
+    if (isloading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else if (newsArticles.isEmpty) {
+      return Center(
+        child: Text(
+          'No workouts available.',
+          style: TextStyle(fontSize: 18.0, color: Colors.grey),
+        ),
+      );
+    } else {
+      return ListView.builder(
+        itemCount: newsArticles.length,
+        itemBuilder: (context, index) {
+          final blog = newsArticles[index];
+          return buildBlog(blog);
+        },
+      );
+    }
+  }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget buildBlog(NewsArticle blog) {
     return Padding(
       padding: const EdgeInsets.only(bottom: kDefaultPadding),
       child: Column(
         children: [
           AspectRatio(
             aspectRatio: 2,
-            child: Image.asset(blog.image!),
+            child: Image.network(blog.urlToImage),
           ),
           Container(
             padding: EdgeInsets.all(kDefaultPadding),
@@ -72,7 +109,6 @@ class BlogPostCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                
                 Row(
                   children: [
                     // Text(
@@ -116,34 +152,38 @@ class BlogPostCard extends StatelessWidget {
                 Row(
                   children: [
                     TextButton(
-                      onPressed: () {},
-                      child: Container(
-                        padding: EdgeInsets.only(bottom: kDefaultPadding / 4),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(color: kPrimaryColor, width: 3),
+                          onPressed: () async {
+                            final Uri url = Uri.parse(blog.url);
+                            launchUrl(url);
+                          },
+                          child: Container(
+                            padding:
+                                EdgeInsets.only(bottom: kDefaultPadding / 4),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom:
+                                    BorderSide(color: kPrimaryColor, width: 3),
+                              ),
+                            ),
+                            child: Text(
+                              "Read More",
+                              style: TextStyle(color: kDarkBlackColor),
+                            ),
                           ),
                         ),
-                        child: Text(
-                          "Read More",
-                          style: TextStyle(color: kDarkBlackColor),
-                        ),
-                      ),
-                    ),
                     Spacer(),
                     IconButton(
-                      icon: SvgPicture.asset(
-                          "/icons/feather_thumbs-up.svg"),
+                      
+                      icon: SvgPicture.asset("/icons/feather_thumbs-up.svg"),
                       onPressed: () {},
                     ),
                     IconButton(
-                      icon: SvgPicture.asset(
-                          "/icons/feather_message-square.svg"),
+                      icon:
+                          SvgPicture.asset("/icons/feather_message-square.svg"),
                       onPressed: () {},
                     ),
                     IconButton(
-                      icon: SvgPicture.asset(
-                          "/icons/feather_share-2.svg"),
+                      icon: SvgPicture.asset("/icons/feather_share-2.svg"),
                       onPressed: () {},
                     ),
                   ],
@@ -156,33 +196,3 @@ class BlogPostCard extends StatelessWidget {
     );
   }
 }
-
-class Blog {
-  final String? date, title, description, image;
-
-  Blog({this.date, this.title, this.description, this.image});
-}
-
-List<Blog> blogPosts = [
-  Blog(
-    date: "14 September 2023",
-    image: "/images/0.png",
-    title: "How Ireland's biggest bank executed a comp lete security redesign",
-    description:
-        "Mobile banking has seen a huge increase since Coronavirus. In fact, CX platform Lightico found that 63 percent of people surveyed said they were more willing to try a new digital banking app than before the pandemic.So while you may be more inclined to bank remotely these days, cybercrime—especially targeting banks—is on the rise.",
-  ),
-  Blog(
-    date: "14 September 2023",
-    image: "/images/1.png",
-    title: "5 Examples of Web Motion Design That Really Catch Your Eye",
-    description:
-        "Web animation has become one of the most exciting web design trends in 2020. It breathes more life into a website and makes user interactions even more appealing and intriguing. Animation for websites allows introducing a brand in an exceptionally creative way in modern digital space. It helps create a lasting impression, make a company",
-  ),
-  Blog(
-    date: "14 September 2023",
-    image: "/images/2.png",
-    title: "The Principles of Dark UI Design",
-    description:
-        "Mobile banking has seen a huge increase since Coronavirus. In fact, CX platform Lightico found that 63 percent of people surveyed said they were more willing to try a new digital banking app than before the pandemic.So while you may be more inclined to bank remotely these days, cybercrime—especially targeting banks—is on the rise.",
-  ),
-];

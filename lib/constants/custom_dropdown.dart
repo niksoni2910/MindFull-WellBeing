@@ -38,8 +38,9 @@ class CustomDropdownFormField<T> extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(40),
           borderSide: BorderSide(
-            
-            color: selectedValue==null?Colors.transparent: const Color.fromRGBO(44, 185, 176, 1),
+            color: selectedValue == null
+                ? Colors.transparent
+                : const Color.fromRGBO(44, 185, 176, 1),
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -48,6 +49,44 @@ class CustomDropdownFormField<T> extends StatelessWidget {
             color: Color.fromRGBO(44, 185, 176, 1),
           ),
         ),
+      ),
+      validator: validator,
+    );
+  }
+}
+
+class CustomDropdownFormFieldEditProfile<T> extends StatelessWidget {
+  final T selectedValue;
+  final List<T> items;
+  final ValueChanged<T?> onChanged;
+  final String labelText;
+  final String? Function(T?) validator;
+  final Icon pIcon;
+
+  const CustomDropdownFormFieldEditProfile({
+    Key? key,
+    required this.selectedValue,
+    required this.items,
+    required this.onChanged,
+    required this.labelText,
+    required this.validator,
+    required this.pIcon,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<T>(
+      value: selectedValue,
+      onChanged: onChanged,
+      items: items.map((T item) {
+        return DropdownMenuItem<T>(
+          value: item,
+          child: Text(item.toString()),
+        );
+      }).toList(),
+      decoration: InputDecoration(
+        labelText: labelText,
+        icon: pIcon,
       ),
       validator: validator,
     );

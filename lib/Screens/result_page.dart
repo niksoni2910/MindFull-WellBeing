@@ -23,6 +23,7 @@ class _ResultsPageState extends State<ResultsPage> {
   Widget buildIllnessIndicators(String name, double percentage,int index) {
     return Column(
       children: [
+
         SleekCircularSlider(
             appearance: CircularSliderAppearance(
               size: name=="Overall"?125:100.0,
@@ -119,22 +120,49 @@ class _ResultsPageState extends State<ResultsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Assessment Results'),
+     appBar: AppBar(
+        title: Text(
+          'Assessment Results',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Color(0xFF6BB9F0), // Customize the app bar color
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const SizedBox(height: 15.0),
-              Column(
-                children: createList(),
-              )
-            ],
+      
+      body: Stack(
+
+        children:[ Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.white, Color(0xFF6BB9F0)], // Customize the gradient colors
+          ),
+        ),),
+        // Mental Health Icon
+        Positioned(
+          top: 100,
+          left: MediaQuery.of(context).size.width / 2 - 50,
+          child: Icon(
+            Icons.favorite,
+            size: 100,
+            color: Colors.white.withOpacity(0.3),
           ),
         ),
-      ),
+          Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const SizedBox(height: 15.0),
+                Column(
+                  children: createList(),
+                )
+              ],
+            ),
+          ),
+        ),
+        
+      ]),
     );
   }
 }
