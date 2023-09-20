@@ -25,8 +25,10 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
+            // gradient: LinearGradient(colors: [Colors.purple, Colors.lightBlue]),
+            // color: Colors.lightBlue,
             image: DecorationImage(
-              image: AssetImage("assets/back.jpg"),
+              image: AssetImage("assets/main-bg.jpg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -49,10 +51,12 @@ class _LoginScreenState extends State<LoginScreen> {
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       width: size.width * 0.9,
-      height: size.height * 0.8,
+      height: size.height * 0.8
       decoration: BoxDecoration(
+        boxShadow: [BoxShadow(spreadRadius: 10, color: Colors.lightBlue)],
         borderRadius: BorderRadius.circular(20.0),
-        color: Colors.white,
+        // gradient: LinearGradient(colors: [Colors.lightBlue, Colors.purple])
+        color: const Color.fromARGB(255, 133, 195, 223),
       ),
       child: Form(
         key: _formKey,
@@ -78,11 +82,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: const [
                         TextSpan(
                             text: 'LOGIN',
-                            style: TextStyle(fontWeight: FontWeight.w800)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w800,
+                                color: Colors.purple)),
                         TextSpan(
                             text: 'PAGE',
                             style: TextStyle(
-                                color: Color(0xFFFE9879),
+                                color: Colors.lightBlue,
                                 fontWeight: FontWeight.w800)),
                       ],
                     ),
@@ -150,13 +156,13 @@ class _LoginScreenState extends State<LoginScreen> {
             borderSide: BorderSide(
               color: emailController.text.isEmpty
                   ? Colors.transparent
-                  : const Color.fromRGBO(44, 185, 176, 1),
+                  : Colors.black,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(40),
             borderSide: const BorderSide(
-              color: Color.fromRGBO(44, 185, 176, 1),
+              color: Colors.black,
             ),
           ),
           prefixIcon: Icon(Icons.email,
@@ -167,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 24.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100.0),
-              color: const Color.fromRGBO(44, 185, 176, 1),
+              color: Colors.black,
             ),
             child: emailController.text.isEmpty
                 ? const Center()
@@ -217,13 +223,13 @@ class _LoginScreenState extends State<LoginScreen> {
             borderSide: BorderSide(
               color: passController.text.isEmpty
                   ? Colors.transparent
-                  : const Color.fromRGBO(44, 185, 176, 1),
+                  : Colors.black,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(40),
             borderSide: const BorderSide(
-              color: Color.fromRGBO(44, 185, 176, 1),
+              color: Colors.black,
             ),
           ),
           prefixIcon: Icon(Icons.lock_outline_rounded,
@@ -234,13 +240,13 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 24.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100.0),
-              color: const Color.fromRGBO(44, 185, 176, 1),
+              color: Colors.black,
             ),
             child: passController.text.isEmpty
                 ? const Center()
                 : const Icon(
                     Icons.check,
-                    color: Colors.white,
+                    color: Colors.black,
                     size: 13,
                   ),
           ),
@@ -285,8 +291,7 @@ class _LoginScreenState extends State<LoginScreen> {
           },
           child: Text(
             'Forgot Password?',
-            style: GoogleFonts.inter(
-                fontSize: 14.0, color: const Color(0xFF21899C)),
+            style: GoogleFonts.inter(fontSize: 14.0, color: Colors.black),
           ),
         ),
       ],
@@ -311,7 +316,7 @@ class _LoginScreenState extends State<LoginScreen> {
           }
         },
         style: ElevatedButton.styleFrom(
-          primary: const Color(0xFF21899C),
+          primary: Colors.black,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         ),
@@ -345,7 +350,7 @@ class _LoginScreenState extends State<LoginScreen> {
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               fontSize: 12.0,
-              color: const Color(0xFF969AA8),
+              color: Colors.black,
               fontWeight: FontWeight.w500,
               height: 1.67,
             ),
@@ -372,7 +377,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: size.height / 13,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(width: 1.0, color: const Color(0xFFEA4335)),
+              border: Border.all(width: 1.0, color: Colors.black),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -386,14 +391,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     'assets/google_logo.svg',
                     height: 16,
                     width: 16,
-                    color: const Color(0xFFEA4335),
+                    color: Colors.black,
                   ),
                 ),
                 SizedBox(width: 16),
                 Text(
                   'Google',
-                  style: GoogleFonts.inter(
-                      fontSize: 14.0, color: const Color(0xFFEA4335)),
+                  style: GoogleFonts.inter(fontSize: 14.0, color: Colors.black),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -411,7 +415,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: size.height / 13,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(width: 1.0, color: const Color(0xFF4285F4)),
+              border: Border.all(width: 1.0, color: Colors.black),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -425,14 +429,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     'assets/facebook_logo.svg',
                     height: 16,
                     width: 16,
-                    color: const Color(0xFF4285F4),
+                    color: Colors.black,
                   ),
                 ),
                 SizedBox(width: 16),
                 Text(
                   'Facebook',
-                  style: GoogleFonts.inter(
-                      fontSize: 14.0, color: const Color(0xFF4285F4)),
+                  style: GoogleFonts.inter(fontSize: 14.0, color: Colors.black),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -456,7 +459,7 @@ class _LoginScreenState extends State<LoginScreen> {
             TextSpan(
                 text: 'Sign Up here',
                 style: TextStyle(
-                    color: Color(0xFFFF7248), fontWeight: FontWeight.w500)),
+                    color: Colors.black, fontWeight: FontWeight.w500)),
           ],
         ),
         textAlign: TextAlign.center,
