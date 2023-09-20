@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
-  final GlobalKey<FormState> formKey;
+  
   final Size size;
   final String buttontext;
   final Function() onpressed;
   const CustomButton({
     Key? key,
-    required this.formKey,
     required this.size,
     required this.buttontext,
     required this.onpressed,

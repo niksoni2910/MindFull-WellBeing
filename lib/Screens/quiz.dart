@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:health_app/Screens/result_page.dart';
 import 'package:health_app/bottom_navigator.dart';
@@ -77,7 +79,7 @@ class _QuizScreenState extends State<QuizScreen> {
   String? selectedOption;
   Future<void> sendAnswers() async {
     final String apiUrl =
-        'https://your-api-url.com/mental'; // Replace with your API URL
+        'https://sih.shreeraj.me/mental'; // Replace with your API URL
     final List<String?> answersList = questions
         .asMap()
         .map(
@@ -87,14 +89,19 @@ class _QuizScreenState extends State<QuizScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse(apiUrl),
-        body: {
-          'mental_report': answersList.join(',')
-        }, // Join answers with commas
-      );
-      print(answersList);
+  Uri.parse(apiUrl),
+  body: {
+    'mental_report': answersList.join(','), // Convert list to comma-separated string
+  },
+);
+      print(response.body);
       if (response.statusCode == 200) {
         // Handle a successful response here
+        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => (ResultsPage()),
+                            ));
         print('Answers sent successfully');
       } else {
         // Handle errors
@@ -185,11 +192,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       // You can implement the scoring logic here
                       if (currentQuestionIndex == 52) {
                         sendAnswers();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => (ResultsPage()),
-                            ));
+                        
                       }
                       if (currentQuestionIndex < questions.length - 1) {
                         setState(() {

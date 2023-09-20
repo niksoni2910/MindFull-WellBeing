@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:health_app/bottom_navigator.dart';
 import 'package:health_app/constants/custom_button.dart';
 import 'package:health_app/constants/custom_dropdown.dart';
 import 'package:health_app/constants/statesandcity.dart';
+import 'package:http/http.dart' as http;
 
 import '../constants/textformfield.dart';
 
@@ -25,6 +28,56 @@ class _RegistrationPageState extends State<RegistrationPage> {
   String selectedCity = '';
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  Future<void> sendRegistrationRequest({
+    required String email,
+    required String name,
+    required String age,
+    required String gender,
+    required String state,
+    required String password,
+  }) async {
+    final Uri registrationUrl = Uri.parse('https://sih.shreeraj.me/register');
+
+    final Map<dynamic, dynamic> registrationData = {
+      'email': email,
+      'name': name,
+      'age': age,
+      'gender': gender,
+      'state': state,
+      'passwd': password,
+    };
+
+    try {
+      final response = await http.post(
+        registrationUrl,
+        body: registrationData,
+      );
+
+      print("this ${response.body}");
+      if (response.statusCode == 200) {
+        // Registration successful, handle the response here.
+        // You can navigate to the next screen or perform any necessary actions.
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => UserBottomNav(),
+            ));
+      } else {
+        final errorMessage = json.decode(response.body)['error'];
+        print(errorMessage);
+        // Registration failed, handle error or show an error message.
+      }
+    } catch (e) {
+      // Handle any exceptions that occur during the HTTP request.
+      print('Error: $e');
+    }
+  }
+
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -104,7 +157,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             if (value == null || value.isEmpty) {
                               return 'Please enter your name';
                             }
-                            return "";
+                            return null;
                           },
                           tType: TextInputType.text,
                           obscureText: false,
@@ -123,7 +176,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             if (value == null || value.isEmpty) {
                               return 'Please enter your age';
                             }
-                            return "";
+                            return null;
                           },
                           tType: TextInputType.number,
                           obscureText: false,
@@ -143,7 +196,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               return 'Please enter your email';
                             }
                             // You can add more email validation logic here if needed.
-                            return "";
+                            return null;
                           },
                           tType: TextInputType.emailAddress,
                           obscureText: false,
@@ -206,7 +259,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               return 'Please enter your password';
                             }
                             // You can add more password validation logic here if needed.
-                            return "";
+                            return null;
                           },
                           tType: TextInputType.visiblePassword,
                           obscureText: true,
@@ -226,7 +279,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               return 'Please confirm your password';
                             }
                             // You can add more validation logic here to ensure it matches the password.
-                            return "";
+                            return null;
                           },
                           tType: TextInputType.visiblePassword,
                           obscureText: true,
@@ -234,15 +287,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                       SizedBox(height: 24),
                       CustomButton(
-                          formKey: _formKey,
                           size: size,
                           buttontext: "Sign-In",
                           onpressed: () {
+                            // try {
                             if (_formKey.currentState!.validate()) {
                               // All fields are valid, you can proceed with registration
                               // You can access the user's input using the controllers
                               String name = nameController.text;
-                              int age = int.parse(ageController.text);
+                              String ageText = ageController.text;
+                              int ages = 18; // Default to 0 if parsing fails
                               String email = emailController.text;
                               String state = selectedState;
                               String city = selectedCity;
@@ -250,17 +304,23 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                               // Implement registration logic here
                               // For example, send data to your backend or perform local registration
-
+                              sendRegistrationRequest(
+                                  email: email,
+                                  name: name,
+                                  password: password,
+                                  age: ageText,
+                                  gender: "male",
+                                  state: state);
                               // Reset form after registration
                               _formKey.currentState!.reset();
                               selectedState = '';
                               selectedCity = '';
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => UserBottomNav(),
-                                  ));
+                            } else {
+                              print("hi");
                             }
+                            // } catch (e) {
+                            //   print('Error: $e');
+                            // }
                           })
                     ],
                   ),
