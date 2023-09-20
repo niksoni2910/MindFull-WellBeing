@@ -194,7 +194,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ),
                           SizedBox(height: 32),
                           CustomButton(
-                            formKey: _formKey,
                             size: MediaQuery.sizeOf(context) * 0.8,
                             buttontext: "Save",
                             onpressed: () {

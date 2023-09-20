@@ -7,7 +7,7 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final int maxLines;
   final Icon pIcon;
-  final String Function(String?)? validator;
+  final String? Function(String?) validator;
   final TextInputType tType;
   final bool obscureText;
   const CustomTextField({

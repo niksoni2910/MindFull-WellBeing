@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:health_app/bottom_navigator.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -17,6 +20,50 @@ class _LoginScreenState extends State<LoginScreen> {
   bool rememberMe = false;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  Future<void> sendLoginRequest(String email, String password) async {
+  final Uri loginUrl = Uri.parse('https://sih.shreeraj.me/login');
+
+  final Map<String, String> loginData = {
+    'email': email,
+    'passwd': password,
+  };
+
+  try {
+    final response = await http.post(
+      loginUrl,
+      headers: {
+        'Content-Type': 'application/json', // Add this header
+      },
+      body: json.encode(loginData), // Encode the data as JSON
+    );
+
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      // Login successful, handle the response here.
+      // You can navigate to the next screen or perform any necessary actions.
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => UserBottomNav(),
+        ),
+      );
+    } else {
+      final errorMessage = json.decode(response.body)['error'];
+      print(errorMessage);
+    }
+  } catch (e) {
+    // Handle any exceptions that occur during the HTTP request.
+    print('Error: $e');
+  }
+}
+
+
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -51,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       width: size.width * 0.9,
-      height: size.height * 0.8
+      height: size.height * 0.8,
       decoration: BoxDecoration(
         boxShadow: [BoxShadow(spreadRadius: 10, color: Colors.lightBlue)],
         borderRadius: BorderRadius.circular(20.0),
@@ -308,11 +355,9 @@ class _LoginScreenState extends State<LoginScreen> {
           if (_formKey.currentState!.validate()) {
             // Form is valid, perform the sign-in action.
             // You can access emailController.text and passController.text here.
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => UserBottomNav(),
-                ));
+            String email = emailController.text;
+            String password = passController.text;
+            sendLoginRequest(email, password);
           }
         },
         style: ElevatedButton.styleFrom(
