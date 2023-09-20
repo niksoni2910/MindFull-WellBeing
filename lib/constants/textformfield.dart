@@ -24,7 +24,6 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      
       controller: controller,
       obscureText: obscureText,
       style: GoogleFonts.inter(
@@ -77,6 +76,41 @@ class CustomTextField extends StatelessWidget {
         ),
       ),
       validator: validator,
+    );
+  }
+}
+
+class CustomTextFormFieldEditProfile extends StatelessWidget {
+  final TextEditingController controller;
+  final Icon pIcon;
+  final String Function(String?)? validator;
+  final TextInputType tType;
+  final bool obscureText;
+  final String labletext;
+  const CustomTextFormFieldEditProfile({
+    Key? key,
+    required this.controller,
+    required this.pIcon,
+    this.validator,
+    required this.tType,
+    required this.obscureText,
+    required this.labletext,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      obscureText: obscureText,
+      keyboardType: tType,
+      validator: validator,
+      style: TextStyle(color: Theme.of(context).primaryColorLight),
+      cursorColor: Theme.of(context).primaryColorLight,
+      autofocus: true,
+      decoration: InputDecoration(
+        labelText: labletext,
+        icon: pIcon,
+      ),
     );
   }
 }
