@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:health_app/Screens/login_screen.dart';
 import 'package:health_app/Screens/quiz.dart';
+import 'package:health_app/Screens/register_screen.dart';
 import 'package:health_app/bottom_navigator.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => LoginScreen(),
+            builder: (context) => RegistrationPage(),
           ));
     });
   }
@@ -30,9 +31,13 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         color: Colors.white,
         child: Center(
-          child: Image.asset('assets/2703664.png' ,height: 200,width: 200,),
+          child: Image.asset(
+            'assets/2703664.png',
+            height: 200,
+            width: 200,
+          ),
         ),
-        ),
-      );
+      ),
+    );
   }
 }

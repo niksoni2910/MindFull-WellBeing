@@ -32,7 +32,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: AssetImage("assets/back.jpg"),
+            image: AssetImage("assets/main-bg.jpg"),
             fit: BoxFit.cover,
           )),
           child: Center(
@@ -51,8 +51,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 width: size.width * 0.9,
                 height: size.height * 0.87,
                 decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(spreadRadius: 10, color: Colors.lightBlue),
+                  ],
                   borderRadius: BorderRadius.circular(20.0),
-                  color: Colors.white,
+                  color: const Color.fromARGB(255, 133, 195, 223),
                 ),
                 child: Form(
                   key: _formKey,
