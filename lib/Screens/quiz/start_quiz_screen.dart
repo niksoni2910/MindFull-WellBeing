@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_app/Screens/quiz.dart';
+import 'package:health_app/Screens/quiz/quiz.dart';
 
 class StartQuiz extends StatefulWidget {
   @override

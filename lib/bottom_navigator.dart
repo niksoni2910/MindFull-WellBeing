@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:health_app/Screens/blog.dart';
-import 'package:health_app/Screens/profile.dart';
-import 'package:health_app/Screens/quiz.dart';
-import 'package:health_app/Screens/start_quiz_screen.dart';
-import 'package:health_app/Screens/workout_screen.dart';
+import 'package:health_app/Screens/profile/profile.dart';
+import 'package:health_app/Screens/quiz/quiz.dart';
+import 'package:health_app/Screens/quiz/start_quiz_screen.dart';
+import 'package:health_app/Screens/workout/workout_screen.dart';
 
 class UserBottomNav extends StatefulWidget {
   const UserBottomNav({super.key});

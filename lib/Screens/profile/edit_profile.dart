@@ -3,7 +3,7 @@ import 'package:health_app/constants/custom_button.dart';
 import 'package:health_app/constants/custom_dropdown.dart';
 import 'package:health_app/constants/textformfield.dart';
 
-import '../constants/statesandcity.dart';
+import '../../constants/statesandcity.dart';
 
 class EditProfileScreen extends StatefulWidget {
   @override

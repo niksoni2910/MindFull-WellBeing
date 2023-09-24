@@ -171,21 +171,21 @@ class _BlogState extends State<Blog2> {
                             ),
                           ),
                         ),
-                    Spacer(),
-                    IconButton(
+                    // Spacer(),
+                    // IconButton(
                       
-                      icon: SvgPicture.asset("/icons/feather_thumbs-up.svg"),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon:
-                          SvgPicture.asset("/icons/feather_message-square.svg"),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: SvgPicture.asset("/icons/feather_share-2.svg"),
-                      onPressed: () {},
-                    ),
+                    //   icon: SvgPicture.asset("/icons/feather_thumbs-up.svg"),
+                    //   onPressed: () {},
+                    // ),
+                    // IconButton(
+                    //   icon:
+                    //       SvgPicture.asset("/icons/feather_message-square.svg"),
+                    //   onPressed: () {},
+                    // ),
+                    // IconButton(
+                    //   icon: SvgPicture.asset("/icons/feather_share-2.svg"),
+                    //   onPressed: () {},
+                    // ),
                   ],
                 ),
               ],
