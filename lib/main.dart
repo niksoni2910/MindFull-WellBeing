@@ -22,5 +22,3 @@ class QuizApp extends StatelessWidget {
     );
   }
 }
-
-

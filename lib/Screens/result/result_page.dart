@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
+import 'package:health_app/Screens/quiz/start_quiz_screen.dart';
+import 'package:health_app/bottom_navigator.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 import 'package:health_app/Screens/result/details.dart';
@@ -52,7 +54,7 @@ class _ResultsPageState extends State<ResultsPage> {
                 ], // Set the same color for both
               ),
               customWidths: CustomSliderWidths(
-                trackWidth: 8.0,
+                trackWidth: 10.0,
                 progressBarWidth: 8.0,
               ),
             ),
@@ -78,6 +80,8 @@ class _ResultsPageState extends State<ResultsPage> {
                     ])),
         if (name != 'Overall')
           ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.green)),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -89,24 +93,10 @@ class _ResultsPageState extends State<ResultsPage> {
               },
               child: Text("Details")),
         SizedBox(
-          height: 5,
+          height: 8,
         )
       ],
     );
-
-    // return CircularPercentIndicator(
-    //   footer: Text(name),
-    //   curve: Curves.linearToEaseOut,
-    //   animation: true,
-    //   radius: 60.0,
-    //   lineWidth: 8.0,
-    //   percent: percentage / 100.0,
-    //   center: Text(
-    //     '${percentage.toStringAsFixed(1)}%',
-    //     style: const TextStyle(fontSize: 16.0),
-    //   ),
-    //   progressColor: Colors.blue,
-    // );
   }
 
   List<Widget> createList() {
@@ -150,20 +140,10 @@ class _ResultsPageState extends State<ResultsPage> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Colors.white,
-                Color(0xFF6BB9F0)
+                Colors.purple,
+                Colors.lightBlue,
               ], // Customize the gradient colors
             ),
-          ),
-        ),
-        // Mental Health Icon
-        Positioned(
-          top: 100,
-          left: MediaQuery.of(context).size.width / 2 - 50,
-          child: Icon(
-            Icons.favorite,
-            size: 100,
-            color: Colors.white.withOpacity(0.3),
           ),
         ),
         Center(
@@ -174,7 +154,19 @@ class _ResultsPageState extends State<ResultsPage> {
                 const SizedBox(height: 15.0),
                 Column(
                   children: createList(),
-                )
+                ),
+                ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.indigo)),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UserBottomNav(),
+                          ));
+                    },
+                    child: Text("Go to Home Page"))
               ],
             ),
           ),
@@ -183,103 +175,3 @@ class _ResultsPageState extends State<ResultsPage> {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-// import 'package:pie_chart/pie_chart.dart';
-
-// class ResultsPage extends StatelessWidget {
-//   final Map<String, double> dataMap = {
-//     "Obsessive Compulsive Disorder": 20,
-//     "Interpersonal Sensitivity": 10,
-//     "Hostility": 50,
-//     "Phobic Anxiety": 10,
-//     "Paranoid Ideation": 10,
-//     "Psychoticism": 5,
-//     "Depression": 3,
-//     "Anxiety": 2,
-//   };
-
-//   final gradientList = <List<Color>>[
-//   [
-//     Color.fromRGBO(223, 250, 92, 1),
-//     Color.fromRGBO(129, 250, 112, 1),
-//   ],
-//   [
-//     Color.fromRGBO(129, 182, 205, 1),
-//     Color.fromRGBO(91, 253, 199, 1),
-//   ],
-//   [
-//     Color.fromRGBO(175, 63, 62, 1.0),
-//     Color.fromRGBO(254, 154, 92, 1),
-//   ],
-//   [
-//     Color.fromRGBO(255, 87, 34, 1),
-//     Color.fromRGBO(255, 193, 7, 1),
-//   ],
-//   [
-//     Color.fromRGBO(103, 58, 183, 1),
-//     Color.fromRGBO(63, 81, 181, 1),
-//   ],
-//   [
-//     Color.fromRGBO(76, 175, 80, 1),
-//     Color.fromRGBO(255, 152, 0, 1),
-//   ],
-//   [
-//     Color.fromRGBO(233, 30, 99, 1),
-//     Color.fromRGBO(156, 39, 176, 1),
-//   ],
-//   [
-//     Color.fromRGBO(0, 150, 136, 1),
-//     Color.fromRGBO(3, 169, 244, 1),
-//   ],
-// ];
-
-//   ResultsPage({Key? key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Results'),
-//       ),
-//       body: Center(
-//         child: Column(
-//           children: <Widget>[
-//             const Text('Your overall score is 1%', style: TextStyle(fontSize: 24)),
-//             const SizedBox(height: 50),
-//             PieChart(
-//               dataMap: dataMap,
-//               totalValue: 100,
-//               gradientList: gradientList,
-//               animationDuration: const Duration(milliseconds: 800),
-//               chartRadius: MediaQuery.of(context).size.width / 2,
-//               initialAngleInDegree: 0,
-//               chartType: ChartType.disc,
-//               ringStrokeWidth: 32,
-//               centerText: "Score",
-//               legendOptions: const LegendOptions(
-//                 showLegends: true,
-//                 legendPosition: LegendPosition.bottom,
-//                 legendTextStyle: TextStyle(
-//                   fontWeight: FontWeight.bold,
-//                 ),
-//               ),
-//               chartValuesOptions: const ChartValuesOptions(
-//                 showChartValueBackground: true,
-//                 showChartValues: true,
-//                 showChartValuesInPercentage: false,
-//                 showChartValuesOutside: false,
-//                 chartValueStyle: TextStyle(
-//                   color: Colors.white,
-//                   fontWeight: FontWeight.bold,
-//                 ),
-//               ),
-//             ),
-//             const SizedBox(height: 50),
-//             const Text('App version v0.8', style: TextStyle(fontSize: 18)),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
