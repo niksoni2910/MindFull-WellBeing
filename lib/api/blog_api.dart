@@ -40,7 +40,7 @@ class NewsArticle {
       String country, String apiKey) async {
     try {
       final Uri uri = Uri.parse(
-          'https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${apiKey}');
+          'https://newsapi.org/v2/top-headlines?country=${country}&category=health&apiKey=${apiKey}');
 
       final response = await http.get(uri);
 

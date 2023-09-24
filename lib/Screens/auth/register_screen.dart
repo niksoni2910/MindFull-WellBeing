@@ -8,7 +8,7 @@ import 'package:health_app/constants/custom_dropdown.dart';
 import 'package:health_app/constants/statesandcity.dart';
 import 'package:http/http.dart' as http;
 
-import '../constants/textformfield.dart';
+import '../../constants/textformfield.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -47,10 +47,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
       'email': email,
       'name': name,
       'age': age,
-      'gender': gender,
+      'gender': "male",
       'state': state,
       'passwd': password,
     };
+
+
 
     try {
       final response = await http.post(
@@ -68,7 +70,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               builder: (context) => UserBottomNav(),
             ));
       } else {
-        final errorMessage = json.decode(response.body)['error'];
+        final errorMessage = json.decode(response.body);
         print(errorMessage);
         // Registration failed, handle error or show an error message.
       }

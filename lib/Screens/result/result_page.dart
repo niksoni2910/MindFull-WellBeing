@@ -1,32 +1,49 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
-import 'package:health_app/Screens/details.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
+import 'package:health_app/Screens/result/details.dart';
+
 class ResultsPage extends StatefulWidget {
+  final List<String> m;
+
+  const ResultsPage({super.key, required this.m});
   @override
   State<ResultsPage> createState() => _ResultsPageState();
 }
 
 class _ResultsPageState extends State<ResultsPage> {
-  List<Map<String, dynamic>> illnessData = [
-    {'name': 'Somatization', 'percentage': 30.0},
-    {'name': 'OCD', 'percentage': 20.0},
-    {'name': 'Interpersonal Sensitivity', 'percentage': 5.0},
-    {'name': 'Depression', 'percentage': 10.0},
-    {'name': 'Anxiety', 'percentage': 15.0},
-    {'name': 'Phobic Anxiety', 'percentage': 8.0},
-    {'name': 'Paranoid Ideation', 'percentage': 7.0},
-    {'name': 'Hostility', 'percentage': 30.0},
-    {'name': 'Psychoticism', 'percentage': 90.0},
-  ];
+  List<Map<String, dynamic>> illnessData = [];
+  late double s;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    s = double.parse(widget.m[10]);
+    illnessData = [
+      {'name': 'Somatization', 'percentage': widget.m[0].toString()},
+      {'name': 'OCD', 'percentage': widget.m[1].toString()},
+      {
+        'name': 'Interpersonal Sensitivity',
+        'percentage': widget.m[2].toString()
+      },
+      {'name': 'Depression', 'percentage': widget.m[3].toString()},
+      {'name': 'Anxiety', 'percentage': widget.m[4].toString()},
+      {'name': 'Hostility', 'percentage': widget.m[5].toString()},
+      {'name': 'Phobic Anxiety', 'percentage': widget.m[6].toString()},
+      {'name': 'Paranoid Ideation', 'percentage': widget.m[7].toString()},
+      {'name': 'Psychoticism', 'percentage': widget.m[8].toString()},
+    ];
+  }
 
-  Widget buildIllnessIndicators(String name, double percentage,int index) {
+  Widget buildIllnessIndicators(String name, double percentage, int index) {
     return Column(
       children: [
-
         SleekCircularSlider(
             appearance: CircularSliderAppearance(
-              size: name=="Overall"?125:100.0,
+              size: name == "Overall" ? 125 : 100.0,
               startAngle: 180,
               angleRange: 180,
               customColors: CustomSliderColors(
@@ -60,15 +77,18 @@ class _ResultsPageState extends State<ResultsPage> {
                             fontWeight: FontWeight.bold, fontSize: 12),
                       )
                     ])),
-        if(name!='Overall')ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailScreen(index: index,),
-                  ));
-            },
-            child: Text("Details")),
+        if (name != 'Overall')
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailScreen(
+                        index: index,
+                      ),
+                    ));
+              },
+              child: Text("Details")),
         SizedBox(
           height: 5,
         )
@@ -95,22 +115,19 @@ class _ResultsPageState extends State<ResultsPage> {
     rows.add(Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        buildIllnessIndicators(
-              'Overall', 10,0),
+        buildIllnessIndicators('Overall', s, 0),
       ],
-      
     ));
     for (int i = 0; i < 9; i += 3) {
       rows.add(Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          buildIllnessIndicators(
-              '${illnessData[i]['name']}', illnessData[i]['percentage'],i),
-          buildIllnessIndicators(
-              '${illnessData[i + 1]['name']}', illnessData[i + 1]['percentage'],i+1),
-          buildIllnessIndicators(
-              '${illnessData[i + 2]['name']}', illnessData[i + 1]['percentage'],i+2)
-
+          buildIllnessIndicators('${illnessData[i]['name']}',
+              double.parse(illnessData[i]['percentage']), i),
+          buildIllnessIndicators('${illnessData[i + 1]['name']}',
+              double.parse(illnessData[i + 1]['percentage']), i + 1),
+          buildIllnessIndicators('${illnessData[i + 2]['name']}',
+              double.parse(illnessData[i + 2]['percentage']), i + 2)
         ],
       ));
     }
@@ -120,24 +137,26 @@ class _ResultsPageState extends State<ResultsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBar(
+      appBar: AppBar(
         title: Text(
           'Assessment Results',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Color(0xFF6BB9F0), // Customize the app bar color
       ),
-      
-      body: Stack(
-
-        children:[ Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.white, Color(0xFF6BB9F0)], // Customize the gradient colors
+      body: Stack(children: [
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.white,
+                Color(0xFF6BB9F0)
+              ], // Customize the gradient colors
+            ),
           ),
-        ),),
+        ),
         // Mental Health Icon
         Positioned(
           top: 100,
@@ -148,7 +167,7 @@ class _ResultsPageState extends State<ResultsPage> {
             color: Colors.white.withOpacity(0.3),
           ),
         ),
-          Center(
+        Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -161,7 +180,6 @@ class _ResultsPageState extends State<ResultsPage> {
             ),
           ),
         ),
-        
       ]),
     );
   }
@@ -216,7 +234,6 @@ class _ResultsPageState extends State<ResultsPage> {
 //     Color.fromRGBO(3, 169, 244, 1),
 //   ],
 // ];
-
 
 //   ResultsPage({Key? key});
 

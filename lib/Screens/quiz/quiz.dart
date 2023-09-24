@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:health_app/Screens/result_page.dart';
+import 'package:health_app/Screens/result/result_page.dart';
 import 'package:health_app/bottom_navigator.dart';
 import 'package:http/http.dart' as http;
 
@@ -67,6 +67,7 @@ class _QuizScreenState extends State<QuizScreen> {
     "The idea that something is wrong with your mind",
   ];
   Map<int, String?> selectedOptions = {};
+  List<String?> answersListf = List.filled(53, "0");
   List<String> options = [
     "Not at all",
     "A little Bit",
@@ -78,31 +79,23 @@ class _QuizScreenState extends State<QuizScreen> {
   int currentQuestionIndex = 52;
   String? selectedOption;
   Future<void> sendAnswers() async {
-    final String apiUrl =
-        'https://sih.shreeraj.me/mental'; // Replace with your API URL
-    final List<String?> answersList = questions
-        .asMap()
-        .map(
-            (index, question) => MapEntry(index, selectedOptions[index] ?? "0"))
-        .values
-        .toList();
-
+    final String apiUrl = 'https://sih.shreeraj.me/mental';
+    print(answersListf);
     try {
       final response = await http.post(
-  Uri.parse(apiUrl),
-  body: {
-    'mental_report': answersList.join(','), // Convert list to comma-separated string
-  },
-);
-      print(response.body);
+        Uri.parse(apiUrl),
+        body: {
+          'mental_report':
+              answersListf.join(','), // Convert list to comma-separated string
+        },
+      );
       if (response.statusCode == 200) {
-        // Handle a successful response here
+        List<String> map = response.body.substring(19,64).split(",");
         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => (ResultsPage()),
-                            ));
-        print('Answers sent successfully');
+            context,
+            MaterialPageRoute(
+              builder: (context) => (ResultsPage(m: map,)),
+            ));
       } else {
         // Handle errors
         print('Failed to send answers. Status code: ${response.statusCode}');
@@ -156,6 +149,16 @@ class _QuizScreenState extends State<QuizScreen> {
                     groupValue: selectedOptions[currentQuestionIndex],
                     onChanged: (value) {
                       setState(() {
+                        if (value == "Not at all")
+                          answersListf[currentQuestionIndex] = "0";
+                        if (value == "A little Bit")
+                          answersListf[currentQuestionIndex] = "1";
+                        if (value == "Moderately")
+                          answersListf[currentQuestionIndex] = "2";
+                        if (value == "Quite A Bit")
+                          answersListf[currentQuestionIndex] = "3";
+                        if (value == "Extremely")
+                          answersListf[currentQuestionIndex] = "4";
                         selectedOption = value;
                         selectedOptions[currentQuestionIndex] =
                             value; // Store selected option for the current question
@@ -192,7 +195,6 @@ class _QuizScreenState extends State<QuizScreen> {
                       // You can implement the scoring logic here
                       if (currentQuestionIndex == 52) {
                         sendAnswers();
-                        
                       }
                       if (currentQuestionIndex < questions.length - 1) {
                         setState(() {

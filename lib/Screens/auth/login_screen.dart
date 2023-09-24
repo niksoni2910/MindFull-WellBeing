@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:health_app/Screens/graph.dart';
+import 'package:health_app/Screens/auth/register_screen.dart';
 import 'package:health_app/bottom_navigator.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,65 +28,66 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> sendLoginRequest(String email, String password) async {
-  final Uri loginUrl = Uri.parse('https://sih.shreeraj.me/login');
+    final Uri loginUrl = Uri.parse('https://sih.shreeraj.me/login');
 
-  final Map<String, String> loginData = {
-    'email': email,
-    'passwd': password,
-  };
+    final Map<String, String> loginData = {
+      'email': email,
+      'passwd': password,
+    };
 
-  try {
-    final response = await http.post(
-      loginUrl,
-      headers: {
-        'Content-Type': 'application/json', // Add this header
-      },
-      body: json.encode(loginData), // Encode the data as JSON
-    );
-
-    print(response.body);
-
-    if (response.statusCode == 200) {
-      // Login successful, handle the response here.
-      // You can navigate to the next screen or perform any necessary actions.
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => UserBottomNav(),
-        ),
+    try {
+      final response = await http.post(
+        loginUrl,
+        headers: {
+          'Content-Type': 'application/json', // Add this header
+        },
+        body: json.encode(loginData), // Encode the data as JSON
       );
-    } else {
-      final errorMessage = json.decode(response.body)['error'];
-      print(errorMessage);
-    }
-  } catch (e) {
-    // Handle any exceptions that occur during the HTTP request.
-    print('Error: $e');
-  }
-}
 
+      print(response.body);
+
+      if (response.statusCode == 200) {
+        // Login successful, handle the response here.
+        // You can navigate to the next screen or perform any necessary actions.
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UserBottomNav(),
+          ),
+        );
+      } else {
+        final errorMessage = json.decode(response.body)['error'];
+        print(errorMessage);
+      }
+    } catch (e) {
+      // Handle any exceptions that occur during the HTTP request.
+      print('Error: $e');
+    }
+  }
 
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFF8F8F8),
-      body: SafeArea(
-        child: Container(
-          decoration: const BoxDecoration(
-            // gradient: LinearGradient(colors: [Colors.purple, Colors.lightBlue]),
-            // color: Colors.lightBlue,
-            image: DecorationImage(
-              image: AssetImage("assets/main-bg.jpg"),
-              fit: BoxFit.cover,
-            ),
+      body: Container(
+        decoration: const BoxDecoration(
+          // gradient: LinearGradient(colors: [Colors.purple, Colors.lightBlue]),
+          // color: Colors.lightBlue,
+          image: DecorationImage(
+            image: AssetImage("assets/main-bg.jpg"),
+            fit: BoxFit.cover,
           ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 16),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 buildCard(size),
                 buildFooter(size),
+                buildFooter2(size)
               ],
             ),
           ),
@@ -118,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   // SvgPicture.asset('assets/logo2.svg',
                   //     height: size.height / 8, width: size.height / 8),
-                  SizedBox(height: size.height * 0.03),
+                  SizedBox(height: size.height * 0.01),
                   Text.rich(
                     TextSpan(
                       style: GoogleFonts.inter(
@@ -492,22 +495,61 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget buildFooter(Size size) {
-    return Padding(
-      padding: EdgeInsets.only(top: size.height * 0.03),
-      child: Text.rich(
-        TextSpan(
-          style: GoogleFonts.inter(fontSize: 12.0, color: Colors.black),
-          children: const [
-            TextSpan(
-                text: 'Don’t have an account? ',
-                style: TextStyle(fontWeight: FontWeight.w500)),
-            TextSpan(
-                text: 'Sign Up here',
-                style: TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.w500)),
-          ],
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RegistrationPage(),
+            ));
+      },
+      child: Padding(
+        padding: EdgeInsets.only(top: size.height * 0.03),
+        child: Text.rich(
+          TextSpan(
+            style: GoogleFonts.inter(fontSize: 12.0, color: Colors.white),
+            children: const [
+              TextSpan(
+                  text: 'Don’t have an account? ',
+                  style: TextStyle(fontWeight: FontWeight.w500)),
+              TextSpan(
+                  text: 'Sign Up here',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500)),
+            ],
+          ),
+          textAlign: TextAlign.center,
         ),
-        textAlign: TextAlign.center,
+      ),
+    );
+  }
+
+  Widget buildFooter2(Size size) {
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MultiLineGraphPage(),
+            ));
+      },
+      child: Padding(
+        padding: EdgeInsets.only(top: size.height * 0.0002),
+        child: Text.rich(
+          TextSpan(
+            style: GoogleFonts.inter(fontSize: 12.0, color: Colors.white),
+            children: const [
+              TextSpan(
+                  text: 'Organization?',
+                  style: TextStyle(fontWeight: FontWeight.w500)),
+              TextSpan(
+                  text: 'See Analysis',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500)),
+            ],
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
