@@ -55,10 +55,6 @@ class _BlogState extends State<Blog2> {
       body: SafeArea(
         child: Container(
           // color: Colors.blue,
-          decoration: BoxDecoration(
-              gradient:
-                  LinearGradient(colors: [Colors.lightBlue, Colors.purple])),
-
           child: _buildBody(),
         ),
       ),
@@ -89,109 +85,73 @@ class _BlogState extends State<Blog2> {
   }
 
   Widget buildBlog(NewsArticle blog) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: kDefaultPadding),
-      child: Column(
-        children: [
-          AspectRatio(
-            aspectRatio: 2,
-            child: Image.network(blog.urlToImage),
-          ),
-          Container(
-            padding: EdgeInsets.all(kDefaultPadding),
-            decoration: BoxDecoration(
-              // color: Colors.amber,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(10),
-                bottomRight: Radius.circular(10),
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            gradient:
+                LinearGradient(colors: [Colors.lightBlue, Colors.purple])),
+        child: Column(
+          children: [
+            AspectRatio(
+              aspectRatio: 16 / 9,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.0),
+                  topRight: Radius.circular(10.0),
+                ),
+                child: Image.network(
+                  blog.urlToImage,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    // Text(
-                    //   "Design".toUpperCase(),
-                    //   style: TextStyle(
-                    //     color: Colors.white,
-                    //     fontSize: 12,
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    // ),
-                    SizedBox(width: kDefaultPadding),
-                    Text(
-                      blog.date!,
-                      style: TextStyle(color: Colors.white),
-                      // style: Theme.of(context).textTheme.caption,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: kDefaultPadding),
-                  child: Text(
+            Padding(
+              padding: const EdgeInsets.all(kDefaultPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    blog.date!,
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
                     blog.title!,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: "Raleway",
-                      color: Colors.white,
-                      height: 1.3,
-                      fontWeight: FontWeight.w600,
-                    ),
+                        fontSize: 20,
+                        fontFamily: "Raleway",
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline),
                   ),
-                ),
-                Text(
-                  blog.description!,
-                  maxLines: 4,
-                  style: TextStyle(height: 1.5, color: Colors.white),
-                ),
-                SizedBox(height: kDefaultPadding),
-                Row(
-                  children: [
-                    TextButton(
-                          onPressed: () async {
-                            final Uri url = Uri.parse(blog.url);
-                            launchUrl(url);
-                          },
-                          child: Container(
-                            padding:
-                                EdgeInsets.only(bottom: kDefaultPadding / 4),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom:
-                                    BorderSide(color: kPrimaryColor, width: 3),
-                              ),
-                            ),
-                            child: Text(
-                              "Read More",
-                              style: TextStyle(color: kDarkBlackColor),
-                            ),
-                          ),
-                        ),
-                    // Spacer(),
-                    // IconButton(
-                      
-                    //   icon: SvgPicture.asset("/icons/feather_thumbs-up.svg"),
-                    //   onPressed: () {},
-                    // ),
-                    // IconButton(
-                    //   icon:
-                    //       SvgPicture.asset("/icons/feather_message-square.svg"),
-                    //   onPressed: () {},
-                    // ),
-                    // IconButton(
-                    //   icon: SvgPicture.asset("/icons/feather_share-2.svg"),
-                    //   onPressed: () {},
-                    // ),
-                  ],
-                ),
-              ],
+                  SizedBox(height: 8),
+                  Text(
+                    blog.description!,
+                    maxLines: 4,
+                    style: TextStyle(color: Colors.black87),
+                  ),
+                  SizedBox(height: 16),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(Colors.purple)),
+                    onPressed: () async {
+                      final Uri url = Uri.parse(blog.url);
+                      launchUrl(url);
+                    },
+                    child: Text("Read More"),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
