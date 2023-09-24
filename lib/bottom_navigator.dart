@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:health_app/Screens/blog.dart';
 import 'package:health_app/Screens/profile/profile.dart';
-import 'package:health_app/Screens/quiz/quiz.dart';
 import 'package:health_app/Screens/quiz/start_quiz_screen.dart';
 import 'package:health_app/Screens/workout/workout_screen.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 
 class UserBottomNav extends StatefulWidget {
   const UserBottomNav({super.key});
@@ -34,7 +34,8 @@ class _UserBottomNavState extends State<UserBottomNav> {
       context: context,
       builder: (context) => AlertDialog(
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8.0))),
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        ),
         title: const Text(
           'Do you want to exit..?',
           style: TextStyle(fontWeight: FontWeight.w300),
@@ -67,35 +68,61 @@ class _UserBottomNavState extends State<UserBottomNav> {
     super.didChangeDependencies();
   }
 
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
         body: _children[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
+        bottomNavigationBar: AnimatedBottomNavigationBar.builder(
+          itemCount: 4,
+          tabBuilder: (int index, bool isActive) {
+            final color = isActive ? Colors.blue : Colors.grey;
+            IconData iconData = Icons.quiz; // Default value
+            String label = 'Quiz'; 
+
+            switch (index) {
+              case 0:
+                iconData = Icons.quiz;
+                label = 'Quiz';
+                break;
+              case 1:
+                iconData = Icons.info;
+                label = 'Blogs';
+                break;
+              case 2:
+                iconData = Icons.fitness_center;
+                label = 'Workout';
+                break;
+              case 3:
+                iconData = CupertinoIcons.profile_circled;
+                label = 'Profile';
+                break;
+            }
+
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  iconData,
+                  color: color,
+                ),
+                Text(
+                  label,
+                  style: TextStyle(color: color),
+                ),
+              ],
+            );
+          },
+          activeIndex: _currentIndex,
+          splashColor: Colors.blue,
+          gapLocation: GapLocation.none,
+          notchSmoothness: NotchSmoothness.defaultEdge,
           onTap: onTappedBar,
-          currentIndex: _currentIndex,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.quiz),
-              label: 'Quiz',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.info),
-              label: 'Blogs',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.work_outline),
-              label: 'Workout',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.profile_circled),
-              label: 'Profile',
-            ),
-          ],
         ),
       ),
     );
   }
 }
+

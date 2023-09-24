@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:health_app/Screens/auth/login_screen.dart';
 import 'package:health_app/Screens/profile/edit_profile.dart';
 
 class UserProfile extends StatefulWidget {
@@ -15,6 +17,42 @@ class _UserProfileState extends State<UserProfile> {
   final String userState = "Maharastra"; // Replace with user's state
   final String userCity = "Mumbai"; // Replace with user's city
   final int userAge = 30; // Replace with user's age
+  Future<bool> _onBackPressed() async {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        ),
+        title: const Text(
+          'Do you want to Log out..?',
+          style: TextStyle(fontWeight: FontWeight.w300),
+        ),
+        actions: <Widget>[
+          CloseButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            color: Colors.red,
+          ),
+          const SizedBox(height: 16),
+          IconButton(
+            onPressed: () async {
+              await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginScreen(),
+                  ));
+            },
+            icon: const Icon(
+              Icons.check,
+              color: Colors.green,
+            ),
+          ),
+          const SizedBox(width: 16),
+        ],
+      ),
+    ).then((value) =>
+        value ?? false); // Ensure to return false if the dialog is dismissed
+  }
 
   // ... Other member variables and methods ...
 
@@ -28,6 +66,7 @@ class _UserProfileState extends State<UserProfile> {
             icon: Icon(Icons.logout), // Add a logout icon here
             onPressed: () {
               // Implement logout functionality
+              _onBackPressed();
             },
           ),
         ],

@@ -12,7 +12,7 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController _nameController = TextEditingController(text: "Akshay");
+  TextEditingController _nameController = TextEditingController();
   TextEditingController _ageController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
@@ -22,55 +22,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-        body: SafeArea(
-      child: Stack(children: [
-        // Gradient Background
-
-        Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.white, Color(0xFF6BB9F0)],
-            ),
-          ),
-        ),
-        // Mental Health Icon
-        Positioned(
-          top: 100,
-          left: MediaQuery.of(context).size.width / 2 - 50,
-          child: Icon(
-            Icons.favorite,
-            size: 100,
-            color: Colors.white.withOpacity(0.3),
-          ),
-        ),
-        // Registration Form
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back), // Replace with your desired icon
-                onPressed: () {
-                  // Add the functionality to close the screen here
-                  Navigator.of(context).pop();
-                },
-              ),
-              Text(
-                '  Edit Profile',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors
-                      .blue.shade900, // Adjust the color to match your gradient
-                ),
-              ),
-            ],
-          ),
-        ),
-        SingleChildScrollView(
+      appBar: AppBar(
+        title: Text("Edit Profile"),
+      ),
+        body: SingleChildScrollView(
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -215,8 +170,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
             ),
           ),
-        )
-      ]),
-    ));
+        ));
   }
 }
