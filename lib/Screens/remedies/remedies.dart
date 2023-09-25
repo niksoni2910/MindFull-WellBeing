@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class RemediesPage extends StatefulWidget {
   @override
   _RemediesPageState createState() => _RemediesPageState();
@@ -104,82 +103,112 @@ class _RemediesPageState extends State<RemediesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Remedies Page'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: 20),
-            DropdownButton<String>(
-              value: selectedIllness,
-              items: illnessData
-                  .map<DropdownMenuItem<String>>(
-                    (data) => DropdownMenuItem<String>(
-                      value: data['name'],
-                      child: Text(data['name']),
-                    ),
-                  )
-                  .toList(),
-              onChanged: (value) {
-                setState(() {
-                  selectedIllness = value!;
-                });
-              },
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Remedies for $selectedIllness',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
+      // appBar: AppBar(
+      //   title: Text('Remedies Page'),
+      // ),
+      body: Container(
+        decoration: BoxDecoration(
+            // image: DecorationImage(
+            //   image: AssetImage("assets/main-bg.jpg"),
+            //   fit: BoxFit.cover,
+            // ),
+            // ),
+            gradient:
+                LinearGradient(colors: [Colors.lightBlue, Colors.purple])),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(height: 20),
+              DropdownButton<String>(
+                dropdownColor: Colors.purple,
+                borderRadius: BorderRadius.circular(10),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: const Color.fromARGB(255, 133, 195, 223)),
+                value: selectedIllness,
+                items: illnessData
+                    .map<DropdownMenuItem<String>>(
+                      (data) => DropdownMenuItem<String>(
+                        value: data['name'],
+                        child: Text(data['name']),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    selectedIllness = value!;
+                  });
+                },
               ),
-            ),
-            SizedBox(height: 10),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: illnessData
-                      .where((data) => data['name'] == selectedIllness)
-                      .map<Widget>(
-                        (data) => Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: data['remedies']
-                              .map<Widget>(
-                                (remedy) => Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 4.0),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.check_circle,
-                                        color: Colors.green,
-                                      ),
-                                      SizedBox(width: 8),
-                                      Flexible(
-                                        child: Text(
-                                          remedy,
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      )
-                      .toList(),
+              SizedBox(height: 20),
+              Text(
+                'Remedies for $selectedIllness',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(255, 133, 195, 223),
                 ),
               ),
-            ),
-          ],
+              SizedBox(height: 10),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: illnessData
+                        .where((data) => data['name'] == selectedIllness)
+                        .map<Widget>(
+                          (data) => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: data['remedies']
+                                .map<Widget>(
+                                  (remedy) => Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
+                                    child: Card(
+                                      elevation: 4,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          // boxShadow: [
+                                          //   BoxShadow(
+                                          //       spreadRadius: 10,
+                                          //       color: Colors.lightBlue)
+                                          // ],
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          // gradient: LinearGradient(colors: [Colors.lightBlue, Colors.purple])
+                                          color: const Color.fromARGB(
+                                              255, 133, 195, 223),
+                                        ),
+                                        child: ListTile(
+                                          leading: Icon(
+                                            Icons.check_circle,
+                                            color: Colors.green,
+                                          ),
+                                          title: Text(
+                                            remedy,
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-

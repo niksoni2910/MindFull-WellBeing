@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:health_app/Screens/result/result_page.dart';
 import 'package:health_app/bottom_navigator.dart';
+import 'package:health_app/constants/constants.dart';
 import 'package:http/http.dart' as http;
 
 class QuizScreen extends StatefulWidget {
@@ -75,6 +76,7 @@ class _QuizScreenState extends State<QuizScreen> {
     "Quite A Bit",
     "Extremely"
   ];
+  
 
   int currentQuestionIndex = 52;
   String? selectedOption;
@@ -85,16 +87,18 @@ class _QuizScreenState extends State<QuizScreen> {
       final response = await http.post(
         Uri.parse(apiUrl),
         body: {
-          'mental_report':
-              answersListf.join(','), // Convert list to comma-separated string
+          'mental_report': answersListf.join(','),
+          'email':userEmail
         },
       );
       if (response.statusCode == 200) {
-        List<String> map = response.body.substring(19,64).split(",");
+        List<String> map = response.body.substring(19, 64).split(",");
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => (ResultsPage(m: map,)),
+              builder: (context) => (ResultsPage(
+                m: map,
+              )),
             ));
       } else {
         // Handle errors

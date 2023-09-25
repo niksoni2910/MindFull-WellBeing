@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:health_app/Screens/graph.dart';
 import 'package:health_app/Screens/quiz/quiz.dart';
+import 'package:health_app/constants/constants.dart';
+import 'package:http/http.dart' as http;
 
 class StartQuiz extends StatefulWidget {
   @override
@@ -7,6 +10,29 @@ class StartQuiz extends StatefulWidget {
 }
 
 class _StartQuizState extends State<StartQuiz> {
+  Future<void> getUser() async {
+    print(userEmail);
+    final Uri registrationUrl = Uri.parse('https://sih.shreeraj.me/profile');
+    final Map<dynamic, dynamic> registrationData = {
+      'email': userEmail,
+    };
+    try {
+      final response = await http.post(
+        registrationUrl,
+        body: registrationData,
+      );
+
+      if (response.statusCode == 200) {
+        // Registration successful, handle the response here.
+        // You can navigate to the next screen or perform any necessary actions.
+        print(response.body);
+      }
+    } catch (e) {
+      // Handle any exceptions that occur during the HTTP request.
+      print('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,6 +97,8 @@ class _StartQuizState extends State<StartQuiz> {
                 child: ElevatedButton(
                   onPressed: () {
                     // Add code to handle button press (navigate to another screen, etc.)
+                    getUser();
+
                     Navigator.push(
                         context,
                         MaterialPageRoute(

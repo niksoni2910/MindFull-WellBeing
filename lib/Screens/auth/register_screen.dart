@@ -25,11 +25,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
       TextEditingController();
 
   String selectedState = '';
-  String selectedCity = '';
+  String selectedGender = '';
+  List<String> gender = ["Select Gender","male", "female"];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -47,12 +47,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
       'email': email,
       'name': name,
       'age': age,
-      'gender': "male",
+      'gender': gender,
       'state': state,
       'passwd': password,
     };
-
-
 
     try {
       final response = await http.post(
@@ -209,18 +207,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         height: size.height / 14,
                         child: CustomDropdownFormField<String?>(
                           selectedValue:
-                              selectedState.isNotEmpty ? selectedState : null,
-                          items: StatesAndCiti.states,
+                              selectedGender.isNotEmpty ? selectedGender: null,
+                          items: gender,
                           onChanged: (String? newValue) {
                             setState(() {
-                              selectedState = newValue ?? '';
-                              selectedCity = 'Select City';
+                              selectedGender = newValue ?? '';
                             });
                           },
-                          labelText: 'State',
+                          labelText: 'Gender',
                           validator: (value) {
-                            if (value == 'Select State') {
-                              return 'Please select a state';
+                            if (value == "Select Gender") {
+                              return 'Please select a Gender';
                             }
                             return null;
                           },
@@ -231,17 +228,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         height: size.height / 14,
                         child: CustomDropdownFormField<String?>(
                           selectedValue:
-                              selectedCity.isNotEmpty ? selectedCity : null,
-                          items: StatesAndCiti.cities[selectedState] ?? [],
+                              selectedState.isNotEmpty ? selectedState : null,
+                          items: StatesAndCiti.states,
                           onChanged: (String? newValue) {
                             setState(() {
-                              selectedCity = newValue ?? '';
+                              selectedState = newValue ?? '';
                             });
                           },
-                          labelText: 'City',
+                          labelText: 'State',
                           validator: (value) {
-                            if (value == 'Select City') {
-                              return 'Please select a city';
+                            if (value == 'Select State') {
+                              return 'Please select a state';
                             }
                             return null;
                           },
@@ -301,9 +298,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               int ages = 18; // Default to 0 if parsing fails
                               String email = emailController.text;
                               String state = selectedState;
-                              String city = selectedCity;
                               String password = passwordController.text;
-
+                              String gender = selectedGender;
                               // Implement registration logic here
                               // For example, send data to your backend or perform local registration
                               sendRegistrationRequest(
@@ -316,7 +312,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               // Reset form after registration
                               _formKey.currentState!.reset();
                               selectedState = '';
-                              selectedCity = '';
                             } else {
                               print("hi");
                             }

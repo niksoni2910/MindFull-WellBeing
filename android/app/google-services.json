@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "953090428309",
+    "project_id": "healtapp-76c4c",
+    "storage_bucket": "healtapp-76c4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953090428309:android:9a3b0b0d3d121c82703a9c",
+        "android_client_info": {
+          "package_name": "com.example.health_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgC0-jx9NVP93nuH4HngDL6kKUlWW2F1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,11 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:health_app/Screens/graph.dart';
 import 'package:health_app/Screens/auth/register_screen.dart';
 import 'package:health_app/bottom_navigator.dart';
+import 'package:health_app/constants/constants.dart';
 import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
@@ -38,10 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       final response = await http.post(
         loginUrl,
-        headers: {
-          'Content-Type': 'application/json', // Add this header
-        },
-        body: json.encode(loginData), // Encode the data as JSON
+        body: loginData, // Encode the data as JSON
       );
 
       print(response.body);
@@ -49,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response.statusCode == 200) {
         // Login successful, handle the response here.
         // You can navigate to the next screen or perform any necessary actions.
+        userEmail = email;
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -394,7 +392,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Expanded(
           flex: 3,
           child: Text(
-            'Don’t Have Account?',
+            'Dont Have Account?',
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               fontSize: 12.0,
@@ -432,7 +430,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: <Widget>[
                 Container(
                   alignment: Alignment.center,
-                  width: 24.0,
+                  width: 20.0,
                   height: 24.0,
                   color: const Color(0xFFC4C4C4).withOpacity(0.0),
                   child: SvgPicture.asset(
@@ -452,7 +450,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-        SizedBox(width: 16),
+        SizedBox(width: 8),
 
         // Facebook button
         TextButton(
@@ -470,7 +468,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: <Widget>[
                 Container(
                   alignment: Alignment.center,
-                  width: 24.0,
+                  width: 20.0,
                   height: 24.0,
                   color: const Color(0xFFC4C4C4).withOpacity(0.0),
                   child: SvgPicture.asset(
@@ -480,7 +478,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(width: 16),
+                SizedBox(width: 8),
                 Text(
                   'Facebook',
                   style: GoogleFonts.inter(fontSize: 14.0, color: Colors.black),
