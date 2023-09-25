@@ -26,6 +26,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   String selectedState = '';
   String selectedCity = '';
+  String selectedGender = '';
+  List<String> gender = ["male", "female"];
 
   @override
   void initState() {
@@ -51,8 +53,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
       'state': state,
       'passwd': password,
     };
-
-
 
     try {
       final response = await http.post(
@@ -209,6 +209,26 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         height: size.height / 14,
                         child: CustomDropdownFormField<String?>(
                           selectedValue:
+                              selectedGender.isNotEmpty ? selectedGender: null,
+                          items: gender,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedState = newValue ?? '';
+                            });
+                          },
+                          labelText: 'Gender',
+                          validator: (value) {
+                            if (value == 'Select Gender') {
+                              return 'Please select a Gender';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.height / 14,
+                        child: CustomDropdownFormField<String?>(
+                          selectedValue:
                               selectedState.isNotEmpty ? selectedState : null,
                           items: StatesAndCiti.states,
                           onChanged: (String? newValue) {
@@ -221,27 +241,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           validator: (value) {
                             if (value == 'Select State') {
                               return 'Please select a state';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      SizedBox(height: 16),
-                      SizedBox(
-                        height: size.height / 14,
-                        child: CustomDropdownFormField<String?>(
-                          selectedValue:
-                              selectedCity.isNotEmpty ? selectedCity : null,
-                          items: StatesAndCiti.cities[selectedState] ?? [],
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              selectedCity = newValue ?? '';
-                            });
-                          },
-                          labelText: 'City',
-                          validator: (value) {
-                            if (value == 'Select City') {
-                              return 'Please select a city';
                             }
                             return null;
                           },
@@ -303,7 +302,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               String state = selectedState;
                               String city = selectedCity;
                               String password = passwordController.text;
-
+                              String gender = selectedGender;
                               // Implement registration logic here
                               // For example, send data to your backend or perform local registration
                               sendRegistrationRequest(
@@ -311,12 +310,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   name: name,
                                   password: password,
                                   age: ageText,
-                                  gender: "male",
+                                  gender: selectedGender,
                                   state: state);
                               // Reset form after registration
                               _formKey.currentState!.reset();
                               selectedState = '';
-                              selectedCity = '';
                             } else {
                               print("hi");
                             }
