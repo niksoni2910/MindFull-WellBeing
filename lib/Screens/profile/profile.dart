@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:health_app/Screens/auth/login_screen.dart';
 import 'package:health_app/Screens/profile/edit_profile.dart';
 
@@ -14,9 +14,10 @@ class _UserProfileState extends State<UserProfile> {
   // Simulated user data for demonstration purposes
   final String userName = "Akshay Potkhule";
   final String userEmail = "Akshaypotkhule123@example.com";
-  final String userState = "Maharastra"; // Replace with user's state
+  final String userState = "Maharashtra"; // Replace with user's state
   final String userCity = "Mumbai"; // Replace with user's city
   final int userAge = 30; // Replace with user's age
+
   Future<bool> _onBackPressed() async {
     return showDialog(
       context: context,
@@ -37,10 +38,11 @@ class _UserProfileState extends State<UserProfile> {
           IconButton(
             onPressed: () async {
               await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
-                  ));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginScreen(),
+                ),
+              );
             },
             icon: const Icon(
               Icons.check,
@@ -54,13 +56,11 @@ class _UserProfileState extends State<UserProfile> {
         value ?? false); // Ensure to return false if the dialog is dismissed
   }
 
-  // ... Other member variables and methods ...
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Profile'),
+        title: Text('Profile'),
         actions: [
           IconButton(
             icon: Icon(Icons.logout), // Add a logout icon here
@@ -71,27 +71,41 @@ class _UserProfileState extends State<UserProfile> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/main-bg.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            // User Information Card
-            UserProfileCard(
-              userName: userName,
-              userEmail: userEmail,
-              userState: userState,
-              userCity: userCity,
-              userAge: userAge,
-              onEditProfile: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditProfileScreen(),
-                    ));
-              },
-            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    UserProfileCard(
+                      userName: userName,
+                      userEmail: userEmail,
+                      userState: userState,
+                      userCity: userCity,
+                      userAge: userAge,
+                      onEditProfile: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditProfileScreen(),
+                          ),
+                        );
+                      },
+                    ),
 
-            // ... Other sections (Screening History, Progress Tracker, Recommendations) ...
+                    // ... Other sections (Screening History, Progress Tracker, Recommendations) ...
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -122,12 +136,12 @@ class UserProfileCard extends StatelessWidget {
       elevation: 4.0,
       margin: EdgeInsets.all(16.0),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(20.0),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(24.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // User Profile Picture (optional)
 
@@ -135,9 +149,10 @@ class UserProfileCard extends StatelessWidget {
             // User Name
             Text(
               userName,
-              style: TextStyle(
-                fontSize: 24,
+              style: GoogleFonts.roboto(
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
+                color: Colors.blue, // Custom text color
               ),
             ),
             SizedBox(height: 8.0),
@@ -145,7 +160,7 @@ class UserProfileCard extends StatelessWidget {
             Text(
               userEmail,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 color: Colors.grey,
               ),
             ),
@@ -155,21 +170,60 @@ class UserProfileCard extends StatelessWidget {
             ),
             // User State
             ListTile(
-              leading: Icon(Icons.location_on),
-              title: Text('State'),
-              subtitle: Text(userState),
+              leading: Icon(
+                Icons.location_on, // Custom icon
+                color: Colors.blue,
+              ),
+              title: Text(
+                'State',
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+              ),
+              subtitle: Text(
+                userState,
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+              ),
             ),
             // User City
             ListTile(
-              leading: Icon(Icons.location_city),
-              title: Text('City'),
-              subtitle: Text(userCity),
+              leading: Icon(
+                Icons.location_city, // Custom icon
+                color: Colors.blue,
+              ),
+              title: Text(
+                'City',
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+              ),
+              subtitle: Text(
+                userCity,
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+              ),
             ),
             // User Age
             ListTile(
-              leading: Icon(Icons.cake),
-              title: Text('Age'),
-              subtitle: Text('$userAge years'),
+              leading: Icon(
+                Icons.cake, // Custom icon
+                color: Colors.blue,
+              ),
+              title: Text(
+                'Age',
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+              ),
+              subtitle: Text(
+                '$userAge years',
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+              ),
             ),
             SizedBox(height: 16.0),
             // Edit Profile Button
@@ -177,6 +231,9 @@ class UserProfileCard extends StatelessWidget {
               ElevatedButton(
                 onPressed: onEditProfile,
                 child: Text('Edit Profile'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue, // Custom button color
+                ),
               ),
           ],
         ),

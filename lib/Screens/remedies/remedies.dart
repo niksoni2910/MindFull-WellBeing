@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
-class DetailScreen extends StatefulWidget {
-  final int index;
-  const DetailScreen({Key? key, required this.index}) : super(key: key);
 
+class RemediesPage extends StatefulWidget {
   @override
-  State<DetailScreen> createState() => _DetailScreenState();
+  _RemediesPageState createState() => _RemediesPageState();
 }
 
-class _DetailScreenState extends State<DetailScreen> {
+class _RemediesPageState extends State<RemediesPage> {
   List<Map<String, dynamic>> illnessData = [
     {
       'name': 'Somatization',
-      'details':
-          'Somatization is the expression of psychological or emotional factors as physical (somatic) symptoms. For example, stress can cause some people to develop headaches, chest pain, back pain, nausea, or fatigue.',
       'remedies': [
         "1. Psychotherapy, such as cognitive-behavioral or psychodynamic therapy, to address underlying emotional issues.",
         "2. Practice mindfulness, meditation, and relaxation techniques to reduce stress and improve mind-body awareness.",
@@ -26,8 +21,6 @@ class _DetailScreenState extends State<DetailScreen> {
     },
     {
       'name': 'OCD',
-      'details':
-          'OCD is a mental health disorder characterized by uncontrollable, recurring thoughts (obsessions) and repetitive behaviors or rituals (compulsions) that are performed to alleviate anxiety.',
       'remedies': [
         "1. Cognitive-behavioral therapy (CBT), particularly Exposure and Response Prevention (ERP), to address obsessions and compulsions.",
         "2. Medication, usually selective serotonin reuptake inhibitors (SSRIs) like fluoxetine or sertraline.",
@@ -37,8 +30,6 @@ class _DetailScreenState extends State<DetailScreen> {
     },
     {
       'name': 'Interpersonal Sensitivity',
-      'details':
-          "Interpersonal Sensitivity refers to the ability to perceive and understand other people's emotions, thoughts, and behaviors in social interactions.",
       'remedies': [
         "1. Cognitive-behavioral therapy (CBT) to identify and challenge negative thought patterns and develop healthier ways of interacting with others.",
         "2. Interpersonal therapy (IPT) to improve interpersonal relationships and communication skills.",
@@ -49,8 +40,6 @@ class _DetailScreenState extends State<DetailScreen> {
     },
     {
       'name': 'Depression',
-      'details':
-          "Depression is a mental health disorder characterized by persistent feelings of sadness, hopelessness, and disinterest in activities that were once enjoyable.",
       'remedies': [
         "1. Psychotherapy, such as cognitive-behavioral therapy (CBT) or interpersonal therapy (IPT), to address negative thought patterns and improve coping strategies.",
         "2. Medication, including selective serotonin reuptake inhibitors (SSRIs) or other antidepressants.",
@@ -61,8 +50,6 @@ class _DetailScreenState extends State<DetailScreen> {
     },
     {
       'name': 'Anxiety',
-      'details':
-          'Anxiety is a mental health disorder characterized by excessive and persistent worry, fear, and unease.',
       'remedies': [
         "1. Cognitive-behavioral therapy (CBT) to identify and challenge anxious thought patterns and develop coping strategies.",
         "2. Medications like selective serotonin reuptake inhibitors (SSRIs) or benzodiazepines in some cases.",
@@ -73,8 +60,6 @@ class _DetailScreenState extends State<DetailScreen> {
     },
     {
       'name': 'Hostility',
-      'details':
-          'Hostility is a psychological state characterized by a negative attitude, anger, aggression, and a tendency to respond aggressively to stimuli.',
       'remedies': [
         "1. Cognitive-behavioral therapy (CBT) to understand and modify thought patterns that contribute to hostile behavior.",
         "2. Anger management therapy to recognize and manage anger through techniques like deep breathing and problem-solving.",
@@ -85,8 +70,6 @@ class _DetailScreenState extends State<DetailScreen> {
     },
     {
       'name': 'Phobic Anxiety',
-      'details':
-          'Phobic anxiety is a type of anxiety disorder characterized by an excessive and persistent fear of a specific object, situation, or activity.',
       'remedies': [
         "1. Exposure therapy to gradually expose individuals to the feared object or situation in a controlled and safe manner.",
         "2. Cognitive-behavioral strategies to identify and challenge irrational thoughts and beliefs associated with the phobia.",
@@ -96,8 +79,6 @@ class _DetailScreenState extends State<DetailScreen> {
     },
     {
       'name': 'Paranoid Ideation',
-      'details':
-          'Paranoid ideation is a type of thought pattern characterized by excessive and irrational suspicion or mistrust of others.',
       'remedies': [
         "1. Cognitive-behavioral therapy (CBT) to identify and challenge irrational or exaggerated paranoid thoughts.",
         "2. Medications such as antipsychotics or mood stabilizers for severe symptoms.",
@@ -108,8 +89,6 @@ class _DetailScreenState extends State<DetailScreen> {
     },
     {
       'name': 'Psychoticism',
-      'details':
-          'Psychoticism is a personality trait characterized by a lack of empathy, impulsivity, aggression, and unconventional beliefs and behaviors.',
       'remedies': [
         "1. Antipsychotic medications prescribed by a healthcare provider for severe symptoms.",
         "2. Psychotherapy, particularly cognitive-behavioral therapy for psychosis (CBTp), to manage distressing beliefs and improve coping strategies.",
@@ -120,102 +99,87 @@ class _DetailScreenState extends State<DetailScreen> {
     },
   ];
 
-  AppBar _buildAppBar() {
-    return AppBar(
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      title: Text("Details"),
-    );
-  }
-
-  Widget _buildBody() {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/main-bg.jpg"),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: ListView(
-        children: [
-          Card(
-            margin: EdgeInsets.all(16.0),
-            elevation: 8.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            color: Colors.white70,
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Shimmer.fromColors(
-                      baseColor: Colors.blue,
-                      highlightColor: Colors.lightBlueAccent,
-                      child: Text(
-                        "Details",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 28,
-                          color: Theme.of(context).primaryColor,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-                  Text(
-                    illnessData[widget.index]['details'],
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                  SizedBox(height: 32.0),
-                  Center(
-                    child: Shimmer.fromColors(
-                      baseColor: Colors.blue,
-                      highlightColor: Colors.lightBlueAccent,
-                      child: Text(
-                        "Remedies",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 28,
-                          color: Theme.of(context).primaryColor,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: illnessData[widget.index]['remedies']
-                        .map<Widget>((remedy) => ListTile(
-                              leading: Icon(Icons.check_circle),
-                              title: Text(remedy),
-                            ))
-                        .toList(),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  String selectedIllness = "Somatization"; // Default selection
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildBody(),
+      appBar: AppBar(
+        title: Text('Remedies Page'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 20),
+            DropdownButton<String>(
+              value: selectedIllness,
+              items: illnessData
+                  .map<DropdownMenuItem<String>>(
+                    (data) => DropdownMenuItem<String>(
+                      value: data['name'],
+                      child: Text(data['name']),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (value) {
+                setState(() {
+                  selectedIllness = value!;
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Remedies for $selectedIllness',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
+            ),
+            SizedBox(height: 10),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: illnessData
+                      .where((data) => data['name'] == selectedIllness)
+                      .map<Widget>(
+                        (data) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: data['remedies']
+                              .map<Widget>(
+                                (remedy) => Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 4.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.check_circle,
+                                        color: Colors.green,
+                                      ),
+                                      SizedBox(width: 8),
+                                      Flexible(
+                                        child: Text(
+                                          remedy,
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
+
