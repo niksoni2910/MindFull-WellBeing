@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:health_app/Screens/blog.dart';
 import 'package:health_app/Screens/profile/profile.dart';
 import 'package:health_app/Screens/quiz/start_quiz_screen.dart';
+import 'package:health_app/Screens/remedies/remedies.dart';
 import 'package:health_app/Screens/workout/workout_screen.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 
@@ -20,6 +21,7 @@ class _UserBottomNavState extends State<UserBottomNav> {
     StartQuiz(),
     const Blog2(),
     Workout(),
+    RemediesPage(),
     const UserProfile(),
   ];
 
@@ -75,7 +77,7 @@ class _UserBottomNavState extends State<UserBottomNav> {
       child: Scaffold(
         body: _children[_currentIndex],
         bottomNavigationBar: AnimatedBottomNavigationBar.builder(
-          itemCount: 4,
+          itemCount: 5,
           tabBuilder: (int index, bool isActive) {
             final color = isActive ? Colors.blue : Colors.grey;
             IconData iconData = Icons.quiz; // Default value
@@ -95,6 +97,10 @@ class _UserBottomNavState extends State<UserBottomNav> {
                 label = 'Workout';
                 break;
               case 3:
+                iconData = Icons.health_and_safety;
+                label = 'Remedies';
+                break;
+              case 4:
                 iconData = CupertinoIcons.profile_circled;
                 label = 'Profile';
                 break;
