@@ -88,6 +88,7 @@ class _QuizScreenState extends State<QuizScreen> {
         Uri.parse(apiUrl),
         body: {
           'mental_report': answersListf.join(','),
+          'email':userEmail
         },
       );
       if (response.statusCode == 200) {

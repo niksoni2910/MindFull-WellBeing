@@ -25,13 +25,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
       TextEditingController();
 
   String selectedState = '';
-  String selectedCity = '';
   String selectedGender = '';
-  List<String> gender = ["male", "female"];
+  List<String> gender = ["Select Gender","male", "female"];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -49,7 +47,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       'email': email,
       'name': name,
       'age': age,
-      'gender': "male",
+      'gender': gender,
       'state': state,
       'passwd': password,
     };
@@ -204,27 +202,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           obscureText: false,
                         ),
                       ),
+                      // SizedBox(height: 16),
+                      // SizedBox(
+                      //   height: size.height / 14,
+                      //   child: CustomDropdownFormField<String?>(
+                      //     selectedValue:
+                      //         selectedGender.isNotEmpty ? selectedGender: null,
+                      //     items: gender,
+                      //     onChanged: (String? newValue) {
+                      //       setState(() {
+                      //         selectedState = newValue ?? '';
+                      //       });
+                      //     },
+                      //     labelText: 'Gender',
+                      //     validator: (value) {
+                      //       if (value == "Select Gender") {
+                      //         return 'Please select a Gender';
+                      //       }
+                      //       return null;
+                      //     },
+                      //   ),
+                      // ),
                       SizedBox(height: 16),
-                      SizedBox(
-                        height: size.height / 14,
-                        child: CustomDropdownFormField<String?>(
-                          selectedValue:
-                              selectedGender.isNotEmpty ? selectedGender: null,
-                          items: gender,
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              selectedState = newValue ?? '';
-                            });
-                          },
-                          labelText: 'Gender',
-                          validator: (value) {
-                            if (value == 'Select Gender') {
-                              return 'Please select a Gender';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
                       SizedBox(
                         height: size.height / 14,
                         child: CustomDropdownFormField<String?>(
@@ -234,7 +233,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           onChanged: (String? newValue) {
                             setState(() {
                               selectedState = newValue ?? '';
-                              selectedCity = 'Select City';
                             });
                           },
                           labelText: 'State',
@@ -300,7 +298,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               int ages = 18; // Default to 0 if parsing fails
                               String email = emailController.text;
                               String state = selectedState;
-                              String city = selectedCity;
                               String password = passwordController.text;
                               String gender = selectedGender;
                               // Implement registration logic here
@@ -310,7 +307,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   name: name,
                                   password: password,
                                   age: ageText,
-                                  gender: selectedGender,
+                                  gender: "male",
                                   state: state);
                               // Reset form after registration
                               _formKey.currentState!.reset();
