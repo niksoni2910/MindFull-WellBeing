@@ -202,27 +202,27 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           obscureText: false,
                         ),
                       ),
-                      // SizedBox(height: 16),
-                      // SizedBox(
-                      //   height: size.height / 14,
-                      //   child: CustomDropdownFormField<String?>(
-                      //     selectedValue:
-                      //         selectedGender.isNotEmpty ? selectedGender: null,
-                      //     items: gender,
-                      //     onChanged: (String? newValue) {
-                      //       setState(() {
-                      //         selectedState = newValue ?? '';
-                      //       });
-                      //     },
-                      //     labelText: 'Gender',
-                      //     validator: (value) {
-                      //       if (value == "Select Gender") {
-                      //         return 'Please select a Gender';
-                      //       }
-                      //       return null;
-                      //     },
-                      //   ),
-                      // ),
+                      SizedBox(height: 16),
+                      SizedBox(
+                        height: size.height / 14,
+                        child: CustomDropdownFormField<String?>(
+                          selectedValue:
+                              selectedGender.isNotEmpty ? selectedGender: null,
+                          items: gender,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedGender = newValue ?? '';
+                            });
+                          },
+                          labelText: 'Gender',
+                          validator: (value) {
+                            if (value == "Select Gender") {
+                              return 'Please select a Gender';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
                       SizedBox(height: 16),
                       SizedBox(
                         height: size.height / 14,
