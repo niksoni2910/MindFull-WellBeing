@@ -6,6 +6,8 @@ import 'package:health_app/Screens/graph.dart';
 import 'package:health_app/Screens/auth/register_screen.dart';
 import 'package:health_app/bottom_navigator.dart';
 import 'package:health_app/constants/constants.dart';
+import 'package:health_app/controller/user_data.dart';
+import 'package:health_app/db%20Model/database_service.dart';
 import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
@@ -35,33 +37,42 @@ class _LoginScreenState extends State<LoginScreen> {
       'passwd': password,
     };
 
-    try {
-      final response = await http.post(
-        loginUrl,
-        body: loginData, // Encode the data as JSON
-      );
+    // try {
+    //   final response = await http.post(
+    //     loginUrl,
+    //     body: loginData, // Encode the data as JSON
+    //   );
 
-      print(response.body);
+    //   print(response.body);
 
-      if (response.statusCode == 200) {
-        // Login successful, handle the response here.
-        // You can navigate to the next screen or perform any necessary actions.
-        userEmail = email;
-        getUser(email);
-        Navigator.push(
+    //   if (response.statusCode == 200) {
+    //     // Login successful, handle the response here.
+    //     // You can navigate to the next screen or perform any necessary actions.
+    //     userEmail = email;
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(
+    //         builder: (context) => UserBottomNav(),
+    //       ),
+    //     );
+    //   } else {
+    //     final errorMessage = json.decode(response.body)['error'];
+    //     print(errorMessage);
+    //   }
+    // } catch (e) {
+    //   // Handle any exceptions that occur during the HTTP request.
+    //   print('Error: $e');
+    // }
+
+    await DatabaseService(uid: userEmail)
+        .savingUserData("health_app", userEmail);
+
+    Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => UserBottomNav(),
           ),
         );
-      } else {
-        final errorMessage = json.decode(response.body)['error'];
-        print(errorMessage);
-      }
-    } catch (e) {
-      // Handle any exceptions that occur during the HTTP request.
-      print('Error: $e');
-    }
   }
 
   Widget build(BuildContext context) {
