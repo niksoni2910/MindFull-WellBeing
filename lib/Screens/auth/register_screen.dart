@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:health_app/bottom_navigator.dart';
+import 'package:health_app/constants/constants.dart';
 import 'package:health_app/constants/custom_button.dart';
 import 'package:health_app/constants/custom_dropdown.dart';
 import 'package:health_app/constants/statesandcity.dart';
@@ -26,7 +27,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   String selectedState = '';
   String selectedGender = '';
-  List<String> gender = ["Select Gender","male", "female"];
+  List<String> gender = ["Select Gender", "male", "female"];
 
   @override
   void initState() {
@@ -42,7 +43,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     required String password,
   }) async {
     final Uri registrationUrl = Uri.parse('https://sih.shreeraj.me/register');
-
+    userEmail = email;
     final Map<dynamic, dynamic> registrationData = {
       'email': email,
       'name': name,
@@ -62,6 +63,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       if (response.statusCode == 200) {
         // Registration successful, handle the response here.
         // You can navigate to the next screen or perform any necessary actions.
+        getUser(email);
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -207,7 +209,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         height: size.height / 14,
                         child: CustomDropdownFormField<String?>(
                           selectedValue:
-                              selectedGender.isNotEmpty ? selectedGender: null,
+                              selectedGender.isNotEmpty ? selectedGender : null,
                           items: gender,
                           onChanged: (String? newValue) {
                             setState(() {
