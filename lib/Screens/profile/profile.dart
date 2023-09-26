@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:health_app/Screens/auth/login_screen.dart';
 import 'package:health_app/Screens/profile/edit_profile.dart';
+import 'package:health_app/constants/constants.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -11,12 +12,7 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  // Simulated user data for demonstration purposes
-  final String userName = "Akshay Potkhule";
-  final String userEmail = "Akshaypotkhule123@example.com";
-  final String userState = "Maharashtra"; // Replace with user's state
-  final String userCity = "Mumbai"; // Replace with user's city
-  final int userAge = 30; // Replace with user's age
+  // Simulated user data for demonstration purposes// Replace with user's age
 
   Future<bool> _onBackPressed() async {
     return showDialog(
@@ -86,11 +82,6 @@ class _UserProfileState extends State<UserProfile> {
                 child: Column(
                   children: <Widget>[
                     UserProfileCard(
-                      userName: userName,
-                      userEmail: userEmail,
-                      userState: userState,
-                      userCity: userCity,
-                      userAge: userAge,
                       onEditProfile: () {
                         Navigator.push(
                           context,
@@ -114,22 +105,12 @@ class _UserProfileState extends State<UserProfile> {
 }
 
 class UserProfileCard extends StatelessWidget {
-  final String userName;
-  final String userEmail;
-  final String userState;
-  final String userCity;
-  final int userAge;
   final VoidCallback? onEditProfile;
 
   UserProfileCard({
-    required this.userName,
-    required this.userEmail,
-    required this.userState,
-    required this.userCity,
-    required this.userAge,
     this.onEditProfile,
   });
-
+  double a = map['age'];
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -148,7 +129,7 @@ class UserProfileCard extends StatelessWidget {
             SizedBox(height: 16.0),
             // User Name
             Text(
-              userName,
+              map['name']!,
               style: GoogleFonts.roboto(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -158,7 +139,7 @@ class UserProfileCard extends StatelessWidget {
             SizedBox(height: 8.0),
             // User Email
             Text(
-              userEmail,
+              map['email'],
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.grey,
@@ -181,7 +162,7 @@ class UserProfileCard extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                userState,
+                map['state'],
                 style: TextStyle(
                   color: Colors.blue,
                 ),
@@ -190,17 +171,19 @@ class UserProfileCard extends StatelessWidget {
             // User City
             ListTile(
               leading: Icon(
-                Icons.location_city, // Custom icon
+                map['gender'] == "male"
+                    ? Icons.male_rounded
+                    : Icons.female_rounded, // Custom icon
                 color: Colors.blue,
               ),
               title: Text(
-                'City',
+                'Gender',
                 style: TextStyle(
                   color: Colors.blue,
                 ),
               ),
               subtitle: Text(
-                userCity,
+                map['gender'],
                 style: TextStyle(
                   color: Colors.blue,
                 ),
@@ -219,7 +202,7 @@ class UserProfileCard extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                '$userAge years',
+                '$a years',
                 style: TextStyle(
                   color: Colors.blue,
                 ),
