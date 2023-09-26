@@ -47,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // Login successful, handle the response here.
         // You can navigate to the next screen or perform any necessary actions.
         userEmail = email;
+        getUser(email);
         Navigator.push(
           context,
           MaterialPageRoute(

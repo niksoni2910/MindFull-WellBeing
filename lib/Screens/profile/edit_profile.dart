@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:health_app/constants/custom_button.dart';
 import 'package:health_app/constants/custom_dropdown.dart';
@@ -17,7 +19,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
   String selectedState = 'Maharashtra';
-  String selectedCity = 'Mumbai';
+  // Future<void> sendLoginRequest(String email, String password) async {
+  //   final Uri loginUrl = Uri.parse('https://sih.shreeraj.me/login');
+
+  //   final Map<String, String> loginData = {
+  //     'email': email,
+  //     'passwd': password,
+  //   };
+
+  //   try {
+  //     final response = await http.post(
+  //       loginUrl,
+  //       body: loginData, // Encode the data as JSON
+  //     );
+
+  //     print(response.body);
+
+  //     if (response.statusCode == 200) {
+  //       // Login successful, handle the response here.
+  //       // You can navigate to the next screen or perform any necessary actions.
+        
+  //     } else {
+  //       final errorMessage = json.decode(response.body)['error'];
+  //       print(errorMessage);
+  //     }
+  //   } catch (e) {
+  //     // Handle any exceptions that occur during the HTTP request.
+  //     print('Error: $e');
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -80,7 +111,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               onChanged: (String? newValue) {
                                 setState(() {
                                   selectedState = newValue ?? '';
-                                  selectedCity = 'Select City';
                                 });
                               },
                               labelText: 'State',
@@ -91,28 +121,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 return null;
                               },
                               pIcon: Icon(Icons.location_pin),
-                            ),
-                          ),
-                          SizedBox(height: 16),
-                          SizedBox(
-                            height: size.height / 14,
-                            child: CustomDropdownFormFieldEditProfile<String?>(
-                              selectedValue:
-                                  selectedCity.isNotEmpty ? selectedCity : null,
-                              items: StatesAndCiti.cities[selectedState] ?? [],
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  selectedCity = newValue ?? '';
-                                });
-                              },
-                              labelText: 'City',
-                              validator: (value) {
-                                if (value == 'Select City') {
-                                  return 'Please select a city';
-                                }
-                                return null;
-                              },
-                              pIcon: Icon(Icons.location_city),
                             ),
                           ),
                           SizedBox(height: 16),
