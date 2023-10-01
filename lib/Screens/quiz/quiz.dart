@@ -78,7 +78,7 @@ class _QuizScreenState extends State<QuizScreen> {
   ];
   
 
-  int currentQuestionIndex = 52;
+  int currentQuestionIndex = 0;
   String? selectedOption;
   Future<void> sendAnswers() async {
     final String apiUrl = 'https://sih.shreeraj.me/mental';

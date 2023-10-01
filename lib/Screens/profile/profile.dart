@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:health_app/Screens/auth/login_screen.dart';
+import 'package:health_app/Screens/graph.dart';
+import 'package:health_app/Screens/group/pages/home_page.dart';
 import 'package:health_app/Screens/profile/edit_profile.dart';
 import 'package:health_app/constants/constants.dart';
 
@@ -218,6 +220,34 @@ class UserProfileCard extends StatelessWidget {
                   backgroundColor: Colors.blue, // Custom button color
                 ),
               ),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GroupHomePage(),
+                    ));
+              },
+              child: Text('Group Chat'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue, // Custom button color
+              ),
+            ),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MultiLineGraphPage(),
+                    ));
+              },
+              child: Text('View History'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue, // Custom button color
+              ),
+            ),
           ],
         ),
       ),

@@ -37,32 +37,33 @@ class _LoginScreenState extends State<LoginScreen> {
       'passwd': password,
     };
 
-    // try {
-    //   final response = await http.post(
-    //     loginUrl,
-    //     body: loginData, // Encode the data as JSON
-    //   );
+    try {
+      final response = await http.post(
+        loginUrl,
+        body: loginData, // Encode the data as JSON
+      );
 
-    //   print(response.body);
+      print(response.body);
 
-    //   if (response.statusCode == 200) {
-    //     // Login successful, handle the response here.
-    //     // You can navigate to the next screen or perform any necessary actions.
-    //     userEmail = email;
-    //     Navigator.push(
-    //       context,
-    //       MaterialPageRoute(
-    //         builder: (context) => UserBottomNav(),
-    //       ),
-    //     );
-    //   } else {
-    //     final errorMessage = json.decode(response.body)['error'];
-    //     print(errorMessage);
-    //   }
-    // } catch (e) {
-    //   // Handle any exceptions that occur during the HTTP request.
-    //   print('Error: $e');
-    // }
+      if (response.statusCode == 200) {
+        // Login successful, handle the response here.
+        // You can navigate to the next screen or perform any necessary actions.
+        userEmail = email;
+        getUser(email);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UserBottomNav(),
+          ),
+        );
+      } else {
+        final errorMessage = json.decode(response.body)['error'];
+        print(errorMessage);
+      }
+    } catch (e) {
+      // Handle any exceptions that occur during the HTTP request.
+      print('Error: $e');
+    }
 
     await DatabaseService(uid: userEmail)
         .savingUserData("health_app", userEmail);
