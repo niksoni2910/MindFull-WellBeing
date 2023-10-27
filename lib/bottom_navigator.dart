@@ -1,29 +1,29 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:health_app/blog.dart';
-import 'package:health_app/main.dart';
-import 'package:health_app/profile.dart';
+import 'package:health_app/Screens/blog.dart';
+import 'package:health_app/Screens/profile/profile.dart';
+import 'package:health_app/Screens/quiz/start_quiz_screen.dart';
+import 'package:health_app/Screens/remedies/remedies.dart';
+import 'package:health_app/Screens/workout/workout_screen.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 
 class UserBottomNav extends StatefulWidget {
-  const UserBottomNav({
-    Key? key,
-  }) : super(key: key);
+  const UserBottomNav({super.key});
+
   @override
-  _UserBottomNavState createState() => _UserBottomNavState();
+  State<UserBottomNav> createState() => _UserBottomNavState();
 }
 
 class _UserBottomNavState extends State<UserBottomNav> {
   int _currentIndex = 0;
-  List<Widget> _children = [];
-  void createlist() {
-    _children = [
-      QuizApp(),
-      Blog(),
-      Profile(),
-    ];
-  }
+  final List<Widget> _children = [
+    StartQuiz(),
+    const Blog2(),
+    Workout(),
+    RemediesPage(),
+    const UserProfile(),
+  ];
 
   void onTappedBar(int index) {
     setState(() {
@@ -31,12 +31,13 @@ class _UserBottomNavState extends State<UserBottomNav> {
     });
   }
 
-  Future<bool> _onBackPressed() {
+  Future<bool> _onBackPressed() async {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8.0))),
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        ),
         title: const Text(
           'Do you want to exit..?',
           style: TextStyle(fontWeight: FontWeight.w300),
@@ -59,7 +60,8 @@ class _UserBottomNavState extends State<UserBottomNav> {
           const SizedBox(width: 16),
         ],
       ),
-    ).then((value) => value);
+    ).then((value) =>
+        value ?? false); // Ensure to return false if the dialog is dismissed
   }
 
   @override
@@ -69,36 +71,64 @@ class _UserBottomNavState extends State<UserBottomNav> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    createlist();
-  }
-
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
         body: _children[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
+        bottomNavigationBar: AnimatedBottomNavigationBar.builder(
+          itemCount: 5,
+          tabBuilder: (int index, bool isActive) {
+            final color = isActive ? Colors.blue : Colors.grey;
+            IconData iconData = Icons.quiz; // Default value
+            String label = 'Quiz'; 
+
+            switch (index) {
+              case 0:
+                iconData = Icons.quiz;
+                label = 'Quiz';
+                break;
+              case 1:
+                iconData = Icons.info;
+                label = 'Blogs';
+                break;
+              case 2:
+                iconData = Icons.fitness_center;
+                label = 'Workout';
+                break;
+              case 3:
+                iconData = Icons.health_and_safety;
+                label = 'Remedies';
+                break;
+              case 4:
+                iconData = CupertinoIcons.profile_circled;
+                label = 'Profile';
+                break;
+            }
+
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  iconData,
+                  color: color,
+                ),
+                Text(
+                  label,
+                  style: TextStyle(color: color),
+                ),
+              ],
+            );
+          },
+          activeIndex: _currentIndex,
+          splashColor: Colors.blue,
+          gapLocation: GapLocation.none,
+          notchSmoothness: NotchSmoothness.defaultEdge,
           onTap: onTappedBar,
-          currentIndex: _currentIndex,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.quiz),
-              label: 'Quiz',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.info),
-              label: 'Blogs',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.profile_circled),
-              label: 'Profile',
-            ),
-          ],
         ),
       ),
     );
   }
 }
+
