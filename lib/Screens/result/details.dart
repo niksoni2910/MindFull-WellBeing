@@ -123,18 +123,18 @@ class _DetailScreenState extends State<DetailScreen> {
   AppBar _buildAppBar() {
     return AppBar(
       leading: IconButton(
-        icon: Icon(Icons.arrow_back),
+        icon: const Icon(Icons.arrow_back),
         onPressed: () {
           Navigator.pop(context);
         },
       ),
-      title: Text("Details"),
+      title: const Text("Details"),
     );
   }
 
   Widget _buildBody() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage("assets/main-bg.jpg"),
           fit: BoxFit.cover,
@@ -143,7 +143,7 @@ class _DetailScreenState extends State<DetailScreen> {
       child: ListView(
         children: [
           Card(
-            margin: EdgeInsets.all(16.0),
+            margin: const EdgeInsets.all(16.0),
             elevation: 8.0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0),
@@ -169,14 +169,14 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   Text(
                     illnessData[widget.index]['details'],
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                     ),
                   ),
-                  SizedBox(height: 32.0),
+                  const SizedBox(height: 32.0),
                   Center(
                     child: Shimmer.fromColors(
                       baseColor: Colors.blue,
@@ -192,12 +192,12 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: illnessData[widget.index]['remedies']
                         .map<Widget>((remedy) => ListTile(
-                              leading: Icon(Icons.check_circle),
+                              leading: const Icon(Icons.check_circle),
                               title: Text(remedy),
                             ))
                         .toList(),

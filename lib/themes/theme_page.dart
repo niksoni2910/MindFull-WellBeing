@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 
@@ -9,7 +8,7 @@ class Mythemes {
         secondaryHeaderColor: darkBluishColor,
         cardColor: Vx.white,
         canvasColor: creamcolor,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
             backgroundColor: Colors.teal,
             elevation: 0.0,
             titleTextStyle: TextStyle(color: Colors.black, fontSize: 22),
@@ -17,10 +16,10 @@ class Mythemes {
         primarySwatch: Colors.green,
       );
 
-  static Color creamcolor = Color(0xfff5f5f5);
+  static Color creamcolor = const Color(0xfff5f5f5);
   static Color darkcreamcolr = Vx.gray900;
-  static Color darkBluishColor = Color(0xff403b58);
-  static Color lightBluishColor = Color.fromARGB(255, 73, 75, 232);
+  static Color darkBluishColor = const Color(0xff403b58);
+  static Color lightBluishColor = const Color.fromARGB(255, 73, 75, 232);
 
   static ThemeData get darkTheme => ThemeData(
         primaryColor: Colors.green,
@@ -32,7 +31,7 @@ class Mythemes {
             backgroundColor: darkcreamcolr,
             elevation: 0.0,
             titleTextStyle: TextStyle(color: darkcreamcolr, fontSize: 22),
-            iconTheme: IconThemeData(color: Colors.white)),
+            iconTheme: const IconThemeData(color: Colors.white)),
         // brightness: Brightness.dark
       );
 }

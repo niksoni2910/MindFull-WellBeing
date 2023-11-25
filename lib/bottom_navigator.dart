@@ -18,10 +18,10 @@ class UserBottomNav extends StatefulWidget {
 class _UserBottomNavState extends State<UserBottomNav> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    StartQuiz(),
+    const StartQuiz(),
     const Blog2(),
-    Workout(),
-    RemediesPage(),
+    const Workout(),
+    const RemediesPage(),
     const UserProfile(),
   ];
 

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:health_app/Screens/graph.dart';
 import 'package:health_app/Screens/quiz/quiz.dart';
-import 'package:health_app/constants/constants.dart';
-import 'package:http/http.dart' as http;
 
 class StartQuiz extends StatefulWidget {
+  const StartQuiz({super.key});
+
   @override
   State<StartQuiz> createState() => _StartQuizState();
 }
@@ -16,10 +15,10 @@ class _StartQuizState extends State<StartQuiz> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Start Assesment'),
+        title: const Text('Start Assesment'),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/main-bg.jpg"),
             fit: BoxFit.cover,
@@ -33,7 +32,7 @@ class _StartQuizState extends State<StartQuiz> {
                 "assets/mental-icon.png", // Replace with your image file path
                 width: 200.0, // Adjust the width as needed
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               // Display an image
@@ -41,15 +40,15 @@ class _StartQuizState extends State<StartQuiz> {
                 padding: const EdgeInsets.all(18.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(spreadRadius: 5, color: Colors.lightBlue)
                     ],
                     borderRadius: BorderRadius.circular(20.0),
                     // gradient: LinearGradient(colors: [Colors.lightBlue, Colors.purple])
                     color: const Color.fromARGB(255, 133, 195, 223),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       "Welcome to the Mental Health Assessment Portal, where your well-being is our priority. Take our mental health test to gain insights into your emotional well-being and discover ways to improve your mental health. Your mental health matters. Your mind is a powerful thing. When you fill it with positive thoughts, your life will start to change",
                       style: TextStyle(
@@ -69,7 +68,7 @@ class _StartQuizState extends State<StartQuiz> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.0), // Spacer
+              const SizedBox(height: 20.0), // Spacer
               // Start button
               SizedBox(
                 width: 150,
@@ -80,10 +79,10 @@ class _StartQuizState extends State<StartQuiz> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => QuizScreen(),
+                          builder: (context) => const QuizScreen(),
                         ));
                   },
-                  child: Text(
+                  child: const Text(
                     'Start',
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),

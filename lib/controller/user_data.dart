@@ -5,10 +5,8 @@ late User loggedInUser;
 void getCurrentUser() {
     try {
       final user = FirebaseAuth.instance.currentUser!;
-      if (user != null) {
-        loggedInUser = user;
-      }
-    } catch (e) {
+      loggedInUser = user;
+        } catch (e) {
       print(e);
     }
 }

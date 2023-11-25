@@ -6,7 +6,6 @@ import 'package:health_app/Screens/graph.dart';
 import 'package:health_app/Screens/auth/register_screen.dart';
 import 'package:health_app/bottom_navigator.dart';
 import 'package:health_app/constants/constants.dart';
-import 'package:health_app/controller/user_data.dart';
 import 'package:health_app/db%20Model/database_service.dart';
 import 'package:http/http.dart' as http;
 
@@ -53,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => UserBottomNav(),
+            builder: (context) => const UserBottomNav(),
           ),
         );
       } else {
@@ -71,11 +70,12 @@ class _LoginScreenState extends State<LoginScreen> {
     Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => UserBottomNav(),
+            builder: (context) => const UserBottomNav(),
           ),
         );
   }
 
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
       width: size.width * 0.9,
       height: size.height * 0.8,
       decoration: BoxDecoration(
-        boxShadow: [BoxShadow(spreadRadius: 10, color: Colors.lightBlue)],
+        boxShadow: const [BoxShadow(spreadRadius: 10, color: Colors.lightBlue)],
         borderRadius: BorderRadius.circular(20.0),
         // gradient: LinearGradient(colors: [Colors.lightBlue, Colors.purple])
         color: const Color.fromARGB(255, 133, 195, 223),
@@ -375,7 +375,7 @@ class _LoginScreenState extends State<LoginScreen> {
           }
         },
         style: ElevatedButton.styleFrom(
-          primary: Colors.black,
+          backgroundColor: Colors.black,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         ),
@@ -398,9 +398,9 @@ class _LoginScreenState extends State<LoginScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Expanded(
+        const Expanded(
           flex: 2,
-          child: Divider(color: const Color(0xFF969AA8)),
+          child: Divider(color: Color(0xFF969AA8)),
         ),
         Expanded(
           flex: 3,
@@ -415,9 +415,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-        Expanded(
+        const Expanded(
           flex: 2,
-          child: Divider(color: const Color(0xFF969AA8)),
+          child: Divider(color: Color(0xFF969AA8)),
         ),
       ],
     );
@@ -453,7 +453,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Text(
                   'Google',
                   style: GoogleFonts.inter(fontSize: 14.0, color: Colors.black),
@@ -463,7 +463,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
 
         // Facebook button
         TextButton(
@@ -491,7 +491,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   'Facebook',
                   style: GoogleFonts.inter(fontSize: 14.0, color: Colors.black),
@@ -511,7 +511,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => RegistrationPage(),
+              builder: (context) => const RegistrationPage(),
             ));
       },
       child: Padding(
@@ -541,7 +541,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MultiLineGraphPage(),
+              builder: (context) => const MultiLineGraphPage(),
             ));
       },
       child: Padding(

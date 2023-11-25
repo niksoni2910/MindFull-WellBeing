@@ -12,6 +12,8 @@ import 'package:http/http.dart' as http;
 import '../../constants/textformfield.dart';
 
 class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
+
   @override
   _RegistrationPageState createState() => _RegistrationPageState();
 }
@@ -67,7 +69,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => UserBottomNav(),
+              builder: (context) => const UserBottomNav(),
             ));
       } else {
         final errorMessage = json.decode(response.body);
@@ -80,12 +82,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
             image: AssetImage("assets/main-bg.jpg"),
             fit: BoxFit.cover,
@@ -106,7 +109,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 width: size.width * 0.9,
                 height: size.height * 0.87,
                 decoration: BoxDecoration(
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(spreadRadius: 10, color: Colors.lightBlue),
                   ],
                   borderRadius: BorderRadius.circular(20.0),
@@ -165,7 +168,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           obscureText: false,
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       SizedBox(
                         height: size.height / 14,
                         child: CustomTextField(
@@ -184,7 +187,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           obscureText: false,
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       SizedBox(
                         height: size.height / 14,
                         child: CustomTextField(
@@ -204,7 +207,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           obscureText: false,
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       SizedBox(
                         height: size.height / 14,
                         child: CustomDropdownFormField<String?>(
@@ -225,7 +228,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           },
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       SizedBox(
                         height: size.height / 14,
                         child: CustomDropdownFormField<String?>(
@@ -246,7 +249,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           },
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       SizedBox(
                         height: size.height / 14,
                         child: CustomTextField(
@@ -266,7 +269,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           obscureText: true,
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       SizedBox(
                         height: size.height / 14,
                         child: CustomTextField(
@@ -286,7 +289,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           obscureText: true,
                         ),
                       ),
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
                       CustomButton(
                           size: size,
                           buttontext: "Sign-In",

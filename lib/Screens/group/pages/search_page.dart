@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:health_app/Screens/group/pages/chat_page.dart';
 import 'package:health_app/constants/constants.dart';
 import 'package:health_app/constants/widgets.dart';
 import 'package:health_app/db%20Model/database_service.dart';
-import 'package:health_app/db%20Model/db_model.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
