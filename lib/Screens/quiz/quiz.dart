@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:health_app/Screens/result/result_page.dart';
-import 'package:health_app/bottom_navigator.dart';
 import 'package:health_app/constants/constants.dart';
 import 'package:http/http.dart' as http;
 
