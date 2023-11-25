@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class MultiLineGraphPage extends StatefulWidget {
+  const MultiLineGraphPage({super.key});
+
   @override
   _MultiLineGraphPageState createState() => _MultiLineGraphPageState();
 }
@@ -62,53 +64,39 @@ class _MultiLineGraphPageState extends State<MultiLineGraphPage> {
       FlSpot(0, dumy[0]),
       FlSpot(0.5, dumy[1]),
       FlSpot(1, dumy[2]),
-      FlSpot(1.5, 90),
+      const FlSpot(1.5, 90),
       FlSpot(2, dumy[4]),
       FlSpot(2.5, dumy[5]),
       FlSpot(3, dumy[6]),
-      FlSpot(3.5, 80),
+      const FlSpot(3.5, 80),
       FlSpot(4, dumy[8]),
-      FlSpot(4.5, 20),
+      const FlSpot(4.5, 20),
       FlSpot(5, dumy[10]),
-      FlSpot(5.5, 10),
+      const FlSpot(5.5, 10),
     ],
     [
       FlSpot(0, dumy[0]),
       FlSpot(0.5, dumy[1]),
       FlSpot(1, dumy[2]),
-      FlSpot(1.5, 10),
+      const FlSpot(1.5, 10),
       FlSpot(2, dumy[4]),
       FlSpot(2.5, dumy[5]),
       FlSpot(3, dumy[6]),
-      FlSpot(3.5, 80),
+      const FlSpot(3.5, 80),
       FlSpot(4, dumy[8]),
       FlSpot(4.5, dumy[9]),
-      FlSpot(5, 40),
+      const FlSpot(5, 40),
       FlSpot(5.5, dumy[11]),
     ],
     [
       FlSpot(0, dumy[0]),
       FlSpot(0.5, dumy[1]),
-      FlSpot(1, 20),
+      const FlSpot(1, 20),
       FlSpot(1.5, dumy[3]),
       FlSpot(2, dumy[4]),
       FlSpot(2.5, dumy[5]),
       FlSpot(3, dumy[6]),
-      FlSpot(3.5, 30),
-      FlSpot(4, dumy[8]),
-      FlSpot(4.5, dumy[9]),
-      FlSpot(5, dumy[10]),
-      FlSpot(5.5, dumy[11]),
-    ],
-    [
-      FlSpot(0, dumy[0]),
-      FlSpot(0.5, dumy[1]),
-      FlSpot(1, dumy[2]),
-      FlSpot(1.5, dumy[3]),
-      FlSpot(2, dumy[4]),
-      FlSpot(2.5, dumy[5]),
-      FlSpot(3, dumy[6]),
-      FlSpot(3.5, dumy[7]),
+      const FlSpot(3.5, 30),
       FlSpot(4, dumy[8]),
       FlSpot(4.5, dumy[9]),
       FlSpot(5, dumy[10]),
@@ -130,44 +118,58 @@ class _MultiLineGraphPageState extends State<MultiLineGraphPage> {
     ],
     [
       FlSpot(0, dumy[0]),
-      FlSpot(0.5,70),
-      FlSpot(1, dumy[2]),
-      FlSpot(1.5, dumy[3]),
-      FlSpot(2,20),
-      FlSpot(2.5, dumy[5]),
-      FlSpot(3, dumy[6]),
-      FlSpot(3.5, dumy[7]),
-      FlSpot(4, 50),
-      FlSpot(4.5, dumy[9]),
-      FlSpot(5, dumy[10]),
-      FlSpot(5.5, 10),
-    ],
-    [
-      FlSpot(0, 30),
-      FlSpot(0.5, dumy[1]),
-      FlSpot(1, dumy[2]),
-      FlSpot(1.5, dumy[3]),
-      FlSpot(2, dumy[4]),
-      FlSpot(2.5, 20),
-      FlSpot(3, dumy[6]),
-      FlSpot(3.5, dumy[7]),
-      FlSpot(4, 40),
-      FlSpot(4.5, dumy[9]),
-      FlSpot(5, dumy[10]),
-      FlSpot(5.5, 10),
-    ],
-    [
-      FlSpot(0, 50),
       FlSpot(0.5, dumy[1]),
       FlSpot(1, dumy[2]),
       FlSpot(1.5, dumy[3]),
       FlSpot(2, dumy[4]),
       FlSpot(2.5, dumy[5]),
       FlSpot(3, dumy[6]),
-      FlSpot(3.5,90),
+      FlSpot(3.5, dumy[7]),
       FlSpot(4, dumy[8]),
       FlSpot(4.5, dumy[9]),
-      FlSpot(5, 20),
+      FlSpot(5, dumy[10]),
+      FlSpot(5.5, dumy[11]),
+    ],
+    [
+      FlSpot(0, dumy[0]),
+      const FlSpot(0.5,70),
+      FlSpot(1, dumy[2]),
+      FlSpot(1.5, dumy[3]),
+      const FlSpot(2,20),
+      FlSpot(2.5, dumy[5]),
+      FlSpot(3, dumy[6]),
+      FlSpot(3.5, dumy[7]),
+      const FlSpot(4, 50),
+      FlSpot(4.5, dumy[9]),
+      FlSpot(5, dumy[10]),
+      const FlSpot(5.5, 10),
+    ],
+    [
+      const FlSpot(0, 30),
+      FlSpot(0.5, dumy[1]),
+      FlSpot(1, dumy[2]),
+      FlSpot(1.5, dumy[3]),
+      FlSpot(2, dumy[4]),
+      const FlSpot(2.5, 20),
+      FlSpot(3, dumy[6]),
+      FlSpot(3.5, dumy[7]),
+      const FlSpot(4, 40),
+      FlSpot(4.5, dumy[9]),
+      FlSpot(5, dumy[10]),
+      const FlSpot(5.5, 10),
+    ],
+    [
+      const FlSpot(0, 50),
+      FlSpot(0.5, dumy[1]),
+      FlSpot(1, dumy[2]),
+      FlSpot(1.5, dumy[3]),
+      FlSpot(2, dumy[4]),
+      FlSpot(2.5, dumy[5]),
+      FlSpot(3, dumy[6]),
+      const FlSpot(3.5,90),
+      FlSpot(4, dumy[8]),
+      FlSpot(4.5, dumy[9]),
+      const FlSpot(5, 20),
       FlSpot(5.5, dumy[11]),
     ],
     
@@ -177,24 +179,24 @@ class _MultiLineGraphPageState extends State<MultiLineGraphPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Multiline Graph'),
+        title: const Text('Multiline Graph'),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient:
                 LinearGradient(colors: [Colors.lightBlue, Colors.purple])),
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   height: 300,
                   child: LineChart(
                     LineChartData(
-                      gridData: FlGridData(show: true),
+                      gridData: const FlGridData(show: true),
                       titlesData: FlTitlesData(
-                        topTitles: AxisTitles(
+                        topTitles: const AxisTitles(
                             sideTitles: SideTitles(showTitles: false)),
                         // rightTitles:
                         //     AxisTitles(sideTitles: SideTitles(showTitles: false)),
@@ -204,32 +206,32 @@ class _MultiLineGraphPageState extends State<MultiLineGraphPage> {
                           getTitlesWidget: (value, meta) {
                             switch (value) {
                               case 0:
-                                return Text('Jan');
+                                return const Text('Jan');
                               case 0.5:
-                                return Text('Feb');
+                                return const Text('Feb');
                               case 1:
-                                return Text('Mar');
+                                return const Text('Mar');
                               case 1.5:
-                                return Text('Apr');
+                                return const Text('Apr');
                               case 2:
-                                return Text('May');
+                                return const Text('May');
                               case 2.5:
-                                return Text('June');
+                                return const Text('June');
                               case 3:
-                                return Text('July');
+                                return const Text('July');
                               case 3.5:
-                                return Text('Aug');
+                                return const Text('Aug');
                               case 4:
-                                return Text('Sept');
+                                return const Text('Sept');
                               case 4.5:
-                                return Text('Oct');
+                                return const Text('Oct');
                               case 5:
-                                return Text('Nov');
+                                return const Text('Nov');
                               case 5.5:
-                                return Text('Dec');
+                                return const Text('Dec');
                               // Add more cases for other months
                               default:
-                                return Text('');
+                                return const Text('');
                             }
                           },
                         )),
@@ -252,14 +254,14 @@ class _MultiLineGraphPageState extends State<MultiLineGraphPage> {
                               spots: lineData[i],
                               isCurved: true,
                               color: lineColors[i],
-                              dotData: FlDotData(show: false),
+                              dotData: const FlDotData(show: false),
                               belowBarData: BarAreaData(show: false),
                             ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -278,7 +280,7 @@ class _MultiLineGraphPageState extends State<MultiLineGraphPage> {
                             ),
                             child: Text(disease[i]),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           )
                         ],

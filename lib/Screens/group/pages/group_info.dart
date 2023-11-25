@@ -4,7 +4,6 @@ import 'package:health_app/Screens/group/pages/home_page.dart';
 import 'package:health_app/constants/constants.dart';
 import 'package:health_app/constants/widgets.dart';
 import 'package:health_app/db%20Model/database_service.dart';
-import 'package:health_app/db%20Model/db_model.dart';
 
 class GroupInfo extends StatefulWidget {
   final String groupId;
@@ -88,7 +87,7 @@ class _GroupInfoState extends State<GroupInfo> {
                                   .whenComplete(() {
                                 nextScreenReplace(
                                     context,
-                                    GroupHomePage(
+                                    const GroupHomePage(
                                     ));
                               });
                             },

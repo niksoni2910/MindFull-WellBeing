@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RemediesPage extends StatefulWidget {
+  const RemediesPage({super.key});
+
   @override
   _RemediesPageState createState() => _RemediesPageState();
 }
@@ -107,7 +109,7 @@ class _RemediesPageState extends State<RemediesPage> {
       //   title: Text('Remedies Page'),
       // ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             // image: DecorationImage(
             //   image: AssetImage("assets/main-bg.jpg"),
             //   fit: BoxFit.cover,
@@ -120,13 +122,13 @@ class _RemediesPageState extends State<RemediesPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               DropdownButton<String>(
                 dropdownColor: Colors.purple,
                 borderRadius: BorderRadius.circular(10),
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(255, 133, 195, 223)),
+                    color: Color.fromARGB(255, 133, 195, 223)),
                 value: selectedIllness,
                 items: illnessData
                     .map<DropdownMenuItem<String>>(
@@ -142,16 +144,16 @@ class _RemediesPageState extends State<RemediesPage> {
                   });
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'Remedies for $selectedIllness',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(255, 133, 195, 223),
+                  color: Color.fromARGB(255, 133, 195, 223),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -185,13 +187,13 @@ class _RemediesPageState extends State<RemediesPage> {
                                               255, 133, 195, 223),
                                         ),
                                         child: ListTile(
-                                          leading: Icon(
+                                          leading: const Icon(
                                             Icons.check_circle,
                                             color: Colors.green,
                                           ),
                                           title: Text(
                                             remedy,
-                                            style: TextStyle(fontSize: 16),
+                                            style: const TextStyle(fontSize: 16),
                                           ),
                                         ),
                                       ),

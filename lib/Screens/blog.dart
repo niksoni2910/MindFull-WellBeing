@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:health_app/api/blog_api.dart';
 import 'package:health_app/constants/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -44,12 +43,13 @@ class _BlogState extends State<Blog2> {
     // }
   }
 
-  Future<void> _launchUrl(Uri _url) async {
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -63,11 +63,11 @@ class _BlogState extends State<Blog2> {
 
   Widget _buildBody() {
     if (isloading) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     } else if (newsArticles.isEmpty) {
-      return Center(
+      return const Center(
         child: Text(
           'No workouts available.',
           style: TextStyle(fontSize: 18.0, color: Colors.grey),
@@ -94,13 +94,13 @@ class _BlogState extends State<Blog2> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             gradient:
-                LinearGradient(colors: [Colors.lightBlue, Colors.purple])),
+                const LinearGradient(colors: [Colors.lightBlue, Colors.purple])),
         child: Column(
           children: [
             AspectRatio(
               aspectRatio: 16 / 9,
               child: ClipRRect(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10.0),
                   topRight: Radius.circular(10.0),
                 ),
@@ -116,36 +116,36 @@ class _BlogState extends State<Blog2> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    blog.date!,
-                    style: TextStyle(color: Colors.grey),
+                    blog.date,
+                    style: const TextStyle(color: Colors.grey),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
-                    blog.title!,
+                    blog.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 20,
                         fontFamily: "Raleway",
                         fontWeight: FontWeight.bold,
                         decoration: TextDecoration.underline),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
-                    blog.description!,
+                    blog.description,
                     maxLines: 4,
-                    style: TextStyle(color: Colors.black87),
+                    style: const TextStyle(color: Colors.black87),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ElevatedButton(
-                    style: ButtonStyle(
+                    style: const ButtonStyle(
                         backgroundColor:
                             MaterialStatePropertyAll(Colors.purple)),
                     onPressed: () async {
                       final Uri url = Uri.parse(blog.url);
                       launchUrl(url);
                     },
-                    child: Text("Read More"),
+                    child: const Text("Read More"),
                   ),
                 ],
               ),

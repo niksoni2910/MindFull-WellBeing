@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
-import 'package:health_app/Screens/quiz/start_quiz_screen.dart';
 import 'package:health_app/bottom_navigator.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
@@ -68,13 +67,13 @@ class _ResultsPageState extends State<ResultsPage> {
                     children: [
                       Text(
                         '${percentage.toStringAsFixed(1)}%',
-                        style: TextStyle(fontSize: 16.0),
+                        style: const TextStyle(fontSize: 16.0),
                       ),
                       Text(
                         name,
                         softWrap: true,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 12),
                       )
                     ])),
@@ -91,8 +90,8 @@ class _ResultsPageState extends State<ResultsPage> {
                       ),
                     ));
               },
-              child: Text("Details")),
-        SizedBox(
+              child: const Text("Details")),
+        const SizedBox(
           height: 8,
         )
       ],
@@ -127,15 +126,15 @@ class _ResultsPageState extends State<ResultsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Assessment Results',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Color(0xFF6BB9F0), // Customize the app bar color
+        backgroundColor: const Color(0xFF6BB9F0), // Customize the app bar color
       ),
       body: Stack(children: [
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -163,10 +162,10 @@ class _ResultsPageState extends State<ResultsPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => UserBottomNav(),
+                            builder: (context) => const UserBottomNav(),
                           ));
                     },
-                    child: Text("Go to Home Page"))
+                    child: const Text("Go to Home Page"))
               ],
             ),
           ),
