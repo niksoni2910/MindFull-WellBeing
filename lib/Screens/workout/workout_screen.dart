@@ -15,15 +15,17 @@ class _BlogState extends State<Workout> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('WorkOut'),
+          title: const Text('WorkOut'),
         ),
-        body: DropdownScreen(),
+        body: const DropdownScreen(),
       ),
     );
   }
 }
 
 class DropdownScreen extends StatefulWidget {
+  const DropdownScreen({super.key});
+
   @override
   _DropdownScreenState createState() => _DropdownScreenState();
 }
@@ -47,14 +49,14 @@ class _DropdownScreenState extends State<DropdownScreen> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/main-bg.jpg"),
             fit: BoxFit.cover,
           ),
         ),
       child: Card(
-        margin: EdgeInsets.only(right: 16, left: 16, top:30,bottom: 30),
+        margin: const EdgeInsets.only(right: 16, left: 16, top:30,bottom: 30),
             elevation: 8.0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0),
@@ -66,7 +68,7 @@ class _DropdownScreenState extends State<DropdownScreen> {
             Shimmer.fromColors(
               baseColor: Colors.blue,
               highlightColor: Colors.lightBlueAccent,
-              child: Text(
+              child: const Text(
                 "Select an Activity",
                 style: TextStyle(
                   fontSize: 24,
@@ -74,13 +76,13 @@ class _DropdownScreenState extends State<DropdownScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Container(
               width: 300,
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
                 gradient:
-                    LinearGradient(colors: [Colors.purple, Colors.lightBlue]),
+                    const LinearGradient(colors: [Colors.purple, Colors.lightBlue]),
                 borderRadius: BorderRadius.circular(8.0),
                 border: Border.all(color: Colors.black),
               ),
@@ -97,17 +99,17 @@ class _DropdownScreenState extends State<DropdownScreen> {
                     value: item,
                     child: Text(
                       item,
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
                   );
                 }).toList(),
               ),
             ),
-            SizedBox(height: 40.0),
+            const SizedBox(height: 40.0),
             Shimmer.fromColors(
               baseColor: Colors.blue,
               highlightColor: Colors.lightBlueAccent,
-              child: Text(
+              child: const Text(
                 "Select a Level",
                 style: TextStyle(
                   fontSize: 24,
@@ -115,13 +117,13 @@ class _DropdownScreenState extends State<DropdownScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 20.0), // Spacer between dropdowns
+            const SizedBox(height: 20.0), // Spacer between dropdowns
             Container(
               width: 300,
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
                 gradient:
-                    LinearGradient(colors: [Colors.purple, Colors.lightBlue]),
+                    const LinearGradient(colors: [Colors.purple, Colors.lightBlue]),
                 // color: Color.fromARGB(255, 8, 46, 214),
                 borderRadius: BorderRadius.circular(8.0),
                 border: Border.all(color: Colors.black),
@@ -139,15 +141,15 @@ class _DropdownScreenState extends State<DropdownScreen> {
                     value: item,
                     child: Text(
                       item,
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
                   );
                 }).toList(),
               ),
             ),
-            SizedBox(height: 40.0),
+            const SizedBox(height: 40.0),
             ElevatedButton(
-              style: ButtonStyle(elevation: MaterialStatePropertyAll(20)),
+              style: const ButtonStyle(elevation: MaterialStatePropertyAll(20)),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -155,7 +157,7 @@ class _DropdownScreenState extends State<DropdownScreen> {
                       builder: (context) => MyHomePage(type: selectedOption1, difficulty: selectedOption2),
                     ));
               },
-              child: Text('Go!'),
+              child: const Text('Go!'),
             ),
           ],
         ),

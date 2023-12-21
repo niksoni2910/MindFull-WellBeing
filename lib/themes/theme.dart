@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-Widget buildPopupDialog(BuildContext context,String title,String content,String textfieldlabel,String textfielhint,String buttonname, TextEditingController _controller,void Function() ontap) {
+Widget buildPopupDialog(BuildContext context,String title,String content,String textfieldlabel,String textfielhint,String buttonname, TextEditingController controller,void Function() ontap) {
     return AlertDialog(
-      contentPadding: EdgeInsets.only(top: 20, left: 20, right: 20),
+      contentPadding: const EdgeInsets.only(top: 20, left: 20, right: 20),
       title: Text(title),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(content),
-          buildTextField(textfieldlabel, textfielhint, _controller,
+          buildTextField(textfieldlabel, textfielhint, controller,
                   TextInputType.name, (() {
                   }))
               .pOnly(top: 20)
@@ -18,7 +18,7 @@ Widget buildPopupDialog(BuildContext context,String title,String content,String 
       ),
       actions: <Widget>[
         ElevatedButton(
-          style: ButtonStyle(
+          style: const ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(Colors.green)),
           onPressed: ontap,
           child: Text(buttonname),
@@ -41,20 +41,20 @@ Widget buildPopupDialog(BuildContext context,String title,String content,String 
         onTap: ontap,
         decoration: InputDecoration(
           contentPadding:
-              EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
           labelText: labelText,
           floatingLabelBehavior: FloatingLabelBehavior.auto,
           hintText: placeholder,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey, width: 2.0),
             // borderRadius: BorderRadius.all(Radius.circular(20.0)),
           ),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.green, width: 2.0),
             // borderRadius: BorderRadius.all(Radius.circular(20.0)),
           ),

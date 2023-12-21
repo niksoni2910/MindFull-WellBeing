@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:health_app/constants/custom_button.dart';
@@ -8,16 +7,18 @@ import 'package:health_app/constants/textformfield.dart';
 import '../../constants/statesandcity.dart';
 
 class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({super.key});
+
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _ageController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   String selectedState = 'Maharashtra';
   // Future<void> sendLoginRequest(String email, String password) async {
   //   final Uri loginUrl = Uri.parse('https://sih.shreeraj.me/login');
@@ -54,7 +55,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Profile"),
+        title: const Text("Edit Profile"),
       ),
         body: SingleChildScrollView(
           child: Center(
@@ -65,7 +66,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Form(
                       key: _formKey,
                       child: Column(
@@ -73,7 +74,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         children: [
                           CustomTextFormFieldEditProfile(
                             controller: _nameController,
-                            pIcon: Icon(Icons.person),
+                            pIcon: const Icon(Icons.person),
                             tType: TextInputType.text,
                             obscureText: false,
                             labletext: 'Name',
@@ -84,10 +85,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               return '';
                             },
                           ),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           CustomTextFormFieldEditProfile(
                             controller: _ageController,
-                            pIcon: Icon(Icons.calendar_today),
+                            pIcon: const Icon(Icons.calendar_today),
                             tType: TextInputType.number,
                             obscureText: false,
                             labletext: 'Age',
@@ -99,7 +100,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               return '';
                             },
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 16,
                           ),
                           SizedBox(
@@ -120,13 +121,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 }
                                 return null;
                               },
-                              pIcon: Icon(Icons.location_pin),
+                              pIcon: const Icon(Icons.location_pin),
                             ),
                           ),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           CustomTextFormFieldEditProfile(
                             controller: _passwordController,
-                            pIcon: Icon(Icons.lock),
+                            pIcon: const Icon(Icons.lock),
                             tType: TextInputType.text,
                             obscureText: true,
                             labletext: 'Password',
@@ -138,10 +139,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               return '';
                             },
                           ),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           CustomTextFormFieldEditProfile(
                             controller: _confirmPasswordController,
-                            pIcon: Icon(Icons.lock),
+                            pIcon: const Icon(Icons.lock),
                             tType: TextInputType.text,
                             obscureText: true,
                             labletext: 'Confirm Password',
@@ -155,7 +156,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               return '';
                             },
                           ),
-                          SizedBox(height: 32),
+                          const SizedBox(height: 32),
                           CustomButton(
                             size: MediaQuery.sizeOf(context) * 0.8,
                             buttontext: "Save",

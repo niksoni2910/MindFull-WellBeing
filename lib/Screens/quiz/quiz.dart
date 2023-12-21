@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:health_app/Screens/result/result_page.dart';
@@ -6,6 +5,8 @@ import 'package:health_app/constants/constants.dart';
 import 'package:http/http.dart' as http;
 
 class QuizScreen extends StatefulWidget {
+  const QuizScreen({super.key});
+
   @override
   _QuizScreenState createState() => _QuizScreenState();
 }
@@ -80,7 +81,7 @@ class _QuizScreenState extends State<QuizScreen> {
   int currentQuestionIndex = 0;
   String? selectedOption;
   Future<void> sendAnswers() async {
-    final String apiUrl = 'https://sih.shreeraj.me/mental';
+    const String apiUrl = 'https://sih.shreeraj.me/mental';
     print(answersListf);
     try {
       final response = await http.post(
@@ -113,10 +114,10 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Assesment"),
+        title: const Text("Assesment"),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/main-bg.jpg"),
             fit: BoxFit.cover,
@@ -128,40 +129,45 @@ class _QuizScreenState extends State<QuizScreen> {
             children: [
               Text(
                 'Question ${currentQuestionIndex + 1}',
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 "For the past week, how much were you bothered by:",
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 questions[currentQuestionIndex],
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Column(
                 children: options.map((option) {
                   return RadioListTile(
                     title: Text(
                       option,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                     value: option,
                     groupValue: selectedOptions[currentQuestionIndex],
                     onChanged: (value) {
                       setState(() {
-                        if (value == "Not at all")
+                        if (value == "Not at all") {
                           answersListf[currentQuestionIndex] = "0";
-                        if (value == "A little Bit")
+                        }
+                        if (value == "A little Bit") {
                           answersListf[currentQuestionIndex] = "1";
-                        if (value == "Moderately")
+                        }
+                        if (value == "Moderately") {
                           answersListf[currentQuestionIndex] = "2";
-                        if (value == "Quite A Bit")
+                        }
+                        if (value == "Quite A Bit") {
                           answersListf[currentQuestionIndex] = "3";
-                        if (value == "Extremely")
+                        }
+                        if (value == "Extremely") {
                           answersListf[currentQuestionIndex] = "4";
+                        }
                         selectedOption = value;
                         selectedOptions[currentQuestionIndex] =
                             value; // Store selected option for the current question
@@ -170,7 +176,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   );
                 }).toList(),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -189,9 +195,9 @@ class _QuizScreenState extends State<QuizScreen> {
                           // Implement your desired behavior here
                         }
                       },
-                      child: Text("Previous"),
+                      child: const Text("Previous"),
                     ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   ElevatedButton(
                     onPressed: () {
                       // Check the answer and move to the next question
@@ -210,8 +216,8 @@ class _QuizScreenState extends State<QuizScreen> {
                       }
                     },
                     child: currentQuestionIndex == 52
-                        ? Text("Submit")
-                        : Text("Next"),
+                        ? const Text("Submit")
+                        : const Text("Next"),
                   ),
                 ],
               ),

@@ -38,7 +38,7 @@ class _UserProfileState extends State<UserProfile> {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
+                  builder: (context) => const LoginScreen(),
                 ),
               );
             },
@@ -58,10 +58,10 @@ class _UserProfileState extends State<UserProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: const Text('Profile'),
         actions: [
           IconButton(
-            icon: Icon(Icons.logout), // Add a logout icon here
+            icon: const Icon(Icons.logout), // Add a logout icon here
             onPressed: () {
               // Implement logout functionality
               _onBackPressed();
@@ -70,7 +70,7 @@ class _UserProfileState extends State<UserProfile> {
         ],
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/main-bg.jpg"),
             fit: BoxFit.cover,
@@ -88,7 +88,7 @@ class _UserProfileState extends State<UserProfile> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => EditProfileScreen(),
+                            builder: (context) => const EditProfileScreen(),
                           ),
                         );
                       },
@@ -109,7 +109,7 @@ class _UserProfileState extends State<UserProfile> {
 class UserProfileCard extends StatelessWidget {
   final VoidCallback? onEditProfile;
 
-  UserProfileCard({
+  UserProfileCard({super.key, 
     this.onEditProfile,
   });
   double a = map['age'];
@@ -117,18 +117,18 @@ class UserProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 4.0,
-      margin: EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(16.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Padding(
-        padding: EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // User Profile Picture (optional)
 
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             // User Name
             Text(
               map['name']!,
@@ -138,26 +138,26 @@ class UserProfileCard extends StatelessWidget {
                 color: Colors.blue, // Custom text color
               ),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             // User Email
             Text(
               map['email'],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 color: Colors.grey,
               ),
             ),
-            Divider(
+            const Divider(
               color: Colors.grey,
               height: 32.0,
             ),
             // User State
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 Icons.location_on, // Custom icon
                 color: Colors.blue,
               ),
-              title: Text(
+              title: const Text(
                 'State',
                 style: TextStyle(
                   color: Colors.blue,
@@ -165,7 +165,7 @@ class UserProfileCard extends StatelessWidget {
               ),
               subtitle: Text(
                 map['state'],
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.blue,
                 ),
               ),
@@ -178,7 +178,7 @@ class UserProfileCard extends StatelessWidget {
                     : Icons.female_rounded, // Custom icon
                 color: Colors.blue,
               ),
-              title: Text(
+              title: const Text(
                 'Gender',
                 style: TextStyle(
                   color: Colors.blue,
@@ -186,18 +186,18 @@ class UserProfileCard extends StatelessWidget {
               ),
               subtitle: Text(
                 map['gender'],
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.blue,
                 ),
               ),
             ),
             // User Age
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 Icons.cake, // Custom icon
                 color: Colors.blue,
               ),
-              title: Text(
+              title: const Text(
                 'Age',
                 style: TextStyle(
                   color: Colors.blue,
@@ -205,20 +205,20 @@ class UserProfileCard extends StatelessWidget {
               ),
               subtitle: Text(
                 '$a years',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.blue,
                 ),
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             // Edit Profile Button
             if (onEditProfile != null)
               ElevatedButton(
                 onPressed: onEditProfile,
-                child: Text('Edit Profile'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue, // Custom button color
                 ),
+                child: const Text('Edit Profile'),
               ),
 
             ElevatedButton(
@@ -226,13 +226,13 @@ class UserProfileCard extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => GroupHomePage(),
+                      builder: (context) => const GroupHomePage(),
                     ));
               },
-              child: Text('Group Chat'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue, // Custom button color
               ),
+              child: const Text('Group Chat'),
             ),
 
             ElevatedButton(
@@ -240,13 +240,13 @@ class UserProfileCard extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MultiLineGraphPage(),
+                      builder: (context) => const MultiLineGraphPage(),
                     ));
               },
-              child: Text('View History'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue, // Custom button color
               ),
+              child: const Text('View History'),
             ),
           ],
         ),

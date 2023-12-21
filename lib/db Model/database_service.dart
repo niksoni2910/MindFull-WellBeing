@@ -113,9 +113,9 @@ Future<List<QueryDocumentSnapshot<Object?>>> findDocumentsWithoutMember(String m
   final List<String> documentsWithMember = [];
 
   // Iterate through the documents and add IDs where memberName is found
-  querySnapshot.docs.forEach((DocumentSnapshot document) {
+  for (var document in querySnapshot.docs) {
     documentsWithMember.add(document.id);
-  });
+  }
 
   // Fetch all documents in the collection
   final QuerySnapshot allDocumentsSnapshot = await FirebaseFirestore.instance

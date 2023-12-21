@@ -2,9 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:health_app/Screens/group/pages/chat_page.dart';
-import 'package:health_app/constants/constants.dart';
 import 'package:health_app/constants/widgets.dart';
-import 'package:health_app/db%20Model/database_service.dart';
 
 class GroupTile extends StatefulWidget {
   final String userName;
